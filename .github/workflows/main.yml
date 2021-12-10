@@ -34,3 +34,26 @@ jobs:
         run: |
           mkdir -p build
           ./build.sh
+          
+      - name: 打包上传工作件
+        uses: actions/upload-artifact@v2
+        with:
+          name: mac_bios_build
+          path: build/*.zip
+          
+      - name: 上传发布版本
+        if: github.event_name == 'release'
+        uses: svenstaro/upload-release-action@483c1e56f95e88835747b1c7c60581215016cbf2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: build/*.bin
+          tag: ${{ github.ref }}
+          file_glob: true
+      - name: 上传发布版本
+        if: github.event_name == 'release'
+        uses: svenstaro/upload-release-action@483c1e56f95e88835747b1c7c60581215016cbf2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: build/*.txt
+          tag: ${{ github.ref }}
+          file_glob: true
