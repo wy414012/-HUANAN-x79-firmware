@@ -7,3 +7,8 @@ current_time=$(date "+%Y_%m_%d")
 ./osx/bin/iasl ./IMSx79/dsdt/DSDT.dsl
 
 ./osx/bin/OZMTool --dsdtinject -i ./IMSx79/E7735IMS.280 -d ./IMSx79/dsdt/DSDT.aml -o ./build/E7735280_x79gd45_$current_time.bin
+
+echo "构建完成开始生成sha256sum码"
+
+md5sum ./build/E7735280_x79gd45_$current_time.bin >./build/E7735280_x79gd45_$current_time.bin.md5.txt
+

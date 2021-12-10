@@ -30,7 +30,7 @@ jobs:
         run: brew install md5sha1sum
 
 
-      - name: Run a multi-line script
+      - name: 运转构建脚本
         run: |
           mkdir -p build
           ./build.sh
