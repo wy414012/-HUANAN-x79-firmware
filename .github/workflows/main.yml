@@ -40,6 +40,12 @@ jobs:
         with:
           name: mac_bios_build
           path: build/*.bin
+
+      - name: 上传md5文件
+        uses: actions/upload-artifact@v2
+        with:
+          name: mac_bios_build
+          path: build/*.txt
           
       - name: 上传发布版本
         if: github.event_name == 'release'
