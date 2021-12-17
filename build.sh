@@ -3,10 +3,11 @@
 
 current_time=$(date "+%Y_%m_%d")
 
+./osx/bin/UEFIPatch ./X79MA-GD45/E7735IMS.280 -o ./build/E7735IMS.280$current_time.bin
 
 ./osx/bin/iasl ./X79MA-GD45/dsdt/DSDT.dsl
 
-./osx/bin/OZMTool --dsdtinject -i ./X79MA-GD45/E7735IMS.280 -d ./X79MA-GD45/dsdt/DSDT.aml -o ./build/E7735280_X79MA-GD45_$current_time.bin
+./osx/bin/OZMTool --dsdtinject -i ./build/E7735IMS.280$current_time.bin -d ./X79MA-GD45/dsdt/DSDT.aml -o ./build/E7735280_X79MA-GD45_$current_time.bin
 
 echo "构建完成开始生成sha256sum码"
 
