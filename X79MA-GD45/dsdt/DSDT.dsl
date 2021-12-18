@@ -5,13 +5,13 @@
  * 
  * Disassembling to symbolic ASL+ operators
  *
- * Disassembly of /Users/wumingquan/Desktop/HUANAN-x79-firmware/IMSx79/dsdt/DSDT.aml, Fri Dec 10 18:59:35 2021
+ * Disassembly of /Users/wumingquan/Desktop/work/mswget/dsdt/DSDT.aml, Sat Dec 18 00:11:48 2021
  *
  * Original Table Header:
  *     Signature        "DSDT"
- *     Length           0x00007D4D (32077)
+ *     Length           0x000083DD (33757)
  *     Revision         0x02
- *     Checksum         0xFC
+ *     Checksum         0x0C
  *     OEM ID           "ALASKA"
  *     OEM Table ID     "A M I"
  *     OEM Revision     0x00000019 (25)
@@ -329,6 +329,16 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
     {
         ICMS,   8, 
         DCMS,   8
+    }
+
+    OperationRegion (PLMT, SystemIO, 0x0310, 0x0A)
+    Field (PLMT, WordAcc, Lock, Preserve)
+    {
+        CPLT,   8, 
+        EG1P,   8, 
+        MPLT,   8, 
+        CFIL,   8, 
+        EG2P,   8
     }
 
     IndexField (ICMS, DCMS, ByteAcc, NoLock, Preserve)
@@ -2494,6 +2504,12 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                             0x00,               // Alignment
                             0x00,               // Length
                             _Y19)
+                        IO (Decode16,
+                            0x0000,             // Range Minimum
+                            0x0000,             // Range Maximum
+                            0x00,               // Alignment
+                            0x00,               // Length
+                            _Y1A)
                     })
                     Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
                     {
@@ -2519,9 +2535,9 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
 
                         If (IO2B)
                         {
-                            CreateWordField (CRS, \_SB.PCI0.LPCB.SIO1._Y18._MIN, GP20)  // _MIN: Minimum Base Address
-                            CreateWordField (CRS, \_SB.PCI0.LPCB.SIO1._Y18._MAX, GP21)  // _MAX: Maximum Base Address
-                            CreateByteField (CRS, \_SB.PCI0.LPCB.SIO1._Y18._LEN, GPL2)  // _LEN: Length
+                            CreateWordField (CRS, \_SB.PCI0.LPCB.SIO1._Y19._MIN, GP20)  // _MIN: Minimum Base Address
+                            CreateWordField (CRS, \_SB.PCI0.LPCB.SIO1._Y19._MAX, GP21)  // _MAX: Maximum Base Address
+                            CreateByteField (CRS, \_SB.PCI0.LPCB.SIO1._Y19._LEN, GPL2)  // _LEN: Length
                             GP20 = IO2B /* \IO2B */
                             GP21 = IO2B /* \IO2B */
                             GPL2 = IO2L /* \IO2L */
@@ -2530,9 +2546,9 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                         ENFG (0x03)
                         If (ACTR)
                         {
-                            CreateWordField (CRS, \_SB.PCI0.LPCB.SIO1._Y19._MIN, GP40)  // _MIN: Minimum Base Address
-                            CreateWordField (CRS, \_SB.PCI0.LPCB.SIO1._Y19._MAX, GP41)  // _MAX: Maximum Base Address
-                            CreateByteField (CRS, \_SB.PCI0.LPCB.SIO1._Y19._LEN, GPL4)  // _LEN: Length
+                            CreateWordField (CRS, \_SB.PCI0.LPCB.SIO1._Y1A._MIN, GP40)  // _MIN: Minimum Base Address
+                            CreateWordField (CRS, \_SB.PCI0.LPCB.SIO1._Y1A._MAX, GP41)  // _MAX: Maximum Base Address
+                            CreateByteField (CRS, \_SB.PCI0.LPCB.SIO1._Y1A._LEN, GPL4)  // _LEN: Length
                             Local0 = (IOAH << 0x08)
                             Local0 |= IOAL /* \_SB_.PCI0.LPCB.SIO1.IOAL */
                             Local1 = (FindSetRightBit (Local0) - One)
@@ -2708,17 +2724,17 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                             0x0000,             // Range Maximum
                             0x01,               // Alignment
                             0x00,               // Length
-                            _Y1C)
-                        IRQNoFlags (_Y1A)
+                            _Y1D)
+                        IRQNoFlags (_Y1B)
                             {}
-                        DMA (Compatibility, NotBusMaster, Transfer8, _Y1B)
+                        DMA (Compatibility, NotBusMaster, Transfer8, _Y1C)
                             {}
                     })
-                    CreateWordField (CRS1, \_SB.PCI0.LPCB.SIO1._Y1A._INT, IRQM)  // _INT: Interrupts
-                    CreateByteField (CRS1, \_SB.PCI0.LPCB.SIO1._Y1B._DMA, DMAM)  // _DMA: Direct Memory Access
-                    CreateWordField (CRS1, \_SB.PCI0.LPCB.SIO1._Y1C._MIN, IO11)  // _MIN: Minimum Base Address
-                    CreateWordField (CRS1, \_SB.PCI0.LPCB.SIO1._Y1C._MAX, IO12)  // _MAX: Maximum Base Address
-                    CreateByteField (CRS1, \_SB.PCI0.LPCB.SIO1._Y1C._LEN, LEN1)  // _LEN: Length
+                    CreateWordField (CRS1, \_SB.PCI0.LPCB.SIO1._Y1B._INT, IRQM)  // _INT: Interrupts
+                    CreateByteField (CRS1, \_SB.PCI0.LPCB.SIO1._Y1C._DMA, DMAM)  // _DMA: Direct Memory Access
+                    CreateWordField (CRS1, \_SB.PCI0.LPCB.SIO1._Y1D._MIN, IO11)  // _MIN: Minimum Base Address
+                    CreateWordField (CRS1, \_SB.PCI0.LPCB.SIO1._Y1D._MAX, IO12)  // _MAX: Maximum Base Address
+                    CreateByteField (CRS1, \_SB.PCI0.LPCB.SIO1._Y1D._LEN, LEN1)  // _LEN: Length
                     Name (CRS2, ResourceTemplate ()
                     {
                         IO (Decode16,
@@ -2726,26 +2742,26 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                             0x0000,             // Range Maximum
                             0x01,               // Alignment
                             0x00,               // Length
-                            _Y1F)
+                            _Y20)
                         IO (Decode16,
                             0x0000,             // Range Minimum
                             0x0000,             // Range Maximum
                             0x01,               // Alignment
                             0x00,               // Length
-                            _Y20)
-                        IRQNoFlags (_Y1D)
+                            _Y21)
+                        IRQNoFlags (_Y1E)
                             {6}
-                        DMA (Compatibility, NotBusMaster, Transfer8, _Y1E)
+                        DMA (Compatibility, NotBusMaster, Transfer8, _Y1F)
                             {2}
                     })
-                    CreateWordField (CRS2, \_SB.PCI0.LPCB.SIO1._Y1D._INT, IRQE)  // _INT: Interrupts
-                    CreateByteField (CRS2, \_SB.PCI0.LPCB.SIO1._Y1E._DMA, DMAE)  // _DMA: Direct Memory Access
-                    CreateWordField (CRS2, \_SB.PCI0.LPCB.SIO1._Y1F._MIN, IO21)  // _MIN: Minimum Base Address
-                    CreateWordField (CRS2, \_SB.PCI0.LPCB.SIO1._Y1F._MAX, IO22)  // _MAX: Maximum Base Address
-                    CreateByteField (CRS2, \_SB.PCI0.LPCB.SIO1._Y1F._LEN, LEN2)  // _LEN: Length
-                    CreateWordField (CRS2, \_SB.PCI0.LPCB.SIO1._Y20._MIN, IO31)  // _MIN: Minimum Base Address
-                    CreateWordField (CRS2, \_SB.PCI0.LPCB.SIO1._Y20._MAX, IO32)  // _MAX: Maximum Base Address
-                    CreateByteField (CRS2, \_SB.PCI0.LPCB.SIO1._Y20._LEN, LEN3)  // _LEN: Length
+                    CreateWordField (CRS2, \_SB.PCI0.LPCB.SIO1._Y1E._INT, IRQE)  // _INT: Interrupts
+                    CreateByteField (CRS2, \_SB.PCI0.LPCB.SIO1._Y1F._DMA, DMAE)  // _DMA: Direct Memory Access
+                    CreateWordField (CRS2, \_SB.PCI0.LPCB.SIO1._Y20._MIN, IO21)  // _MIN: Minimum Base Address
+                    CreateWordField (CRS2, \_SB.PCI0.LPCB.SIO1._Y20._MAX, IO22)  // _MAX: Maximum Base Address
+                    CreateByteField (CRS2, \_SB.PCI0.LPCB.SIO1._Y20._LEN, LEN2)  // _LEN: Length
+                    CreateWordField (CRS2, \_SB.PCI0.LPCB.SIO1._Y21._MIN, IO31)  // _MIN: Minimum Base Address
+                    CreateWordField (CRS2, \_SB.PCI0.LPCB.SIO1._Y21._MAX, IO32)  // _MAX: Maximum Base Address
+                    CreateByteField (CRS2, \_SB.PCI0.LPCB.SIO1._Y21._LEN, LEN3)  // _LEN: Length
                     Method (DCRS, 2, NotSerialized)
                     {
                         ENFG (CGLD (Arg0))
@@ -3491,30 +3507,6 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                     })
                 }
 
-                Device (PMCR)
-                {
-                    Name (_HID, EisaId ("APP9876"))  // _HID: Hardware ID
-                    Method (_STA, 0, NotSerialized)  // _STA: Status
-                    {
-                        If (_OSI ("Darwin"))
-                        {
-                            Return (0x0B)
-                        }
-                        Else
-                        {
-                            Return (Zero)
-                        }
-                    }
-
-                    Name (_CRS, ResourceTemplate ()  // _CRS: Current Resource Settings
-                    {
-                        Memory32Fixed (ReadWrite,
-                            0xFE000000,         // Address Base
-                            0x00010000,         // Address Length
-                            )
-                    })
-                }
-
                 Scope (^^PCI0)
                 {
                     Name (SLIC, Buffer (0x9E)
@@ -3548,745 +3540,205 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
             Device (BR20)
             {
                 Name (_ADR, 0x001E0000)  // _ADR: Address
+                Name (UPS1, Package (0x02)
+                {
+                    0x0B, 
+                    0x04
+                })
                 Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
                 {
-                    Return (GPRW (0x0B, 0x04))
-                }
-            }
-
-            Device (SAT0)
-            {
-                Name (_ADR, 0x001F0002)  // _ADR: Address
-                Name (^NATA, Package (0x01)
-                {
-                    0x001F0002
-                })
-                Name (\FZTF, Buffer (0x07)
-                {
-                     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xF5         // .......
-                })
-                Name (REGF, One)
-                Method (_REG, 2, NotSerialized)  // _REG: Region Availability
-                {
-                    If ((Arg0 == 0x02))
-                    {
-                        REGF = Arg1
-                    }
+                    Return (UPS1) /* \_SB_.PCI0.BR20.UPS1 */
                 }
 
-                Name (TIM0, Package (0x08)
+                Method (_PRT, 0, NotSerialized)  // _PRT: PCI Routing Table
                 {
-                    Package (0x04)
+                    If ((PICM == Zero))
                     {
-                        0x78, 
-                        0xB4, 
-                        0xF0, 
-                        0x0384
-                    }, 
-
-                    Package (0x04)
-                    {
-                        0x23, 
-                        0x21, 
-                        0x10, 
-                        Zero
-                    }, 
-
-                    Package (0x04)
-                    {
-                        0x0B, 
-                        0x09, 
-                        0x04, 
-                        Zero
-                    }, 
-
-                    Package (0x06)
-                    {
-                        0x78, 
-                        0x5A, 
-                        0x3C, 
-                        0x28, 
-                        0x1E, 
-                        0x14
-                    }, 
-
-                    Package (0x06)
-                    {
-                        Zero, 
-                        One, 
-                        0x02, 
-                        One, 
-                        0x02, 
-                        One
-                    }, 
-
-                    Package (0x06)
-                    {
-                        Zero, 
-                        Zero, 
-                        Zero, 
-                        One, 
-                        One, 
-                        One
-                    }, 
-
-                    Package (0x04)
-                    {
-                        0x04, 
-                        0x03, 
-                        0x02, 
-                        Zero
-                    }, 
-
-                    Package (0x04)
-                    {
-                        0x02, 
-                        One, 
-                        Zero, 
-                        Zero
-                    }
-                })
-                Name (TMD0, Buffer (0x14){})
-                CreateDWordField (TMD0, Zero, PIO0)
-                CreateDWordField (TMD0, 0x04, DMA0)
-                CreateDWordField (TMD0, 0x08, PIO1)
-                CreateDWordField (TMD0, 0x0C, DMA1)
-                CreateDWordField (TMD0, 0x10, CHNF)
-                OperationRegion (CFG2, PCI_Config, 0x40, 0x20)
-                Field (CFG2, DWordAcc, NoLock, Preserve)
-                {
-                    PMPT,   4, 
-                    PSPT,   4, 
-                    PMRI,   6, 
-                    Offset (0x02), 
-                    SMPT,   4, 
-                    SSPT,   4, 
-                    SMRI,   6, 
-                    Offset (0x04), 
-                    PSRI,   4, 
-                    SSRI,   4, 
-                    Offset (0x08), 
-                    PM3E,   1, 
-                    PS3E,   1, 
-                    SM3E,   1, 
-                    SS3E,   1, 
-                    Offset (0x0A), 
-                    PMUT,   2, 
-                        ,   2, 
-                    PSUT,   2, 
-                    Offset (0x0B), 
-                    SMUT,   2, 
-                        ,   2, 
-                    SSUT,   2, 
-                    Offset (0x0C), 
-                    Offset (0x14), 
-                    PM6E,   1, 
-                    PS6E,   1, 
-                    SM6E,   1, 
-                    SS6E,   1, 
-                    PMCR,   1, 
-                    PSCR,   1, 
-                    SMCR,   1, 
-                    SSCR,   1, 
-                        ,   4, 
-                    PMAE,   1, 
-                    PSAE,   1, 
-                    SMAE,   1, 
-                    SSAE,   1
-                }
-
-                Name (GMPT, Zero)
-                Name (GMUE, Zero)
-                Name (GMUT, Zero)
-                Name (GMCR, Zero)
-                Name (GSPT, Zero)
-                Name (GSUE, Zero)
-                Name (GSUT, Zero)
-                Name (GSCR, Zero)
-                Device (CHN0)
-                {
-                    Name (_ADR, Zero)  // _ADR: Address
-                    Method (_GTM, 0, NotSerialized)  // _GTM: Get Timing Mode
-                    {
-                        Local1 = (PSCR << One)
-                        Local0 = (PMCR | Local1)
-                        Local3 = (PMAE << 0x02)
-                        Local4 = (PM6E << One)
-                        Local3 |= Local4
-                        Local1 = (PM3E | Local3)
-                        Local3 = (PMPT << 0x04)
-                        Local1 |= Local3
-                        Local3 = (PSAE << 0x02)
-                        Local4 = (PS6E << One)
-                        Local3 |= Local4
-                        Local2 = (PS3E | Local3)
-                        Local3 = (PSPT << 0x04)
-                        Local2 |= Local3
-                        Return (GTM (PMRI, Local1, PMUT, PSRI, Local2, PSUT, Local0))
-                    }
-
-                    Method (_STM, 3, NotSerialized)  // _STM: Set Timing Mode
-                    {
-                        Debug = Arg0
-                        TMD0 = Arg0
-                        Local3 = (PMAE << 0x02)
-                        Local4 = (PM6E << One)
-                        Local3 |= Local4
-                        Local0 = (PM3E | Local3)
-                        Local3 = (PMPT << 0x04)
-                        Local0 |= Local3
-                        Local3 = (PSAE << 0x02)
-                        Local4 = (PS6E << One)
-                        Local3 |= Local4
-                        Local1 = (PS3E | Local3)
-                        Local3 = (PSPT << 0x04)
-                        Local1 |= Local3
-                        GMPT = PMRI /* \_SB_.PCI0.SAT0.PMRI */
-                        GMUE = Local0
-                        GMUT = PMUT /* \_SB_.PCI0.SAT0.PMUT */
-                        GMCR = PMCR /* \_SB_.PCI0.SAT0.PMCR */
-                        GSPT = PSRI /* \_SB_.PCI0.SAT0.PSRI */
-                        GSUE = Local1
-                        GSUT = PSUT /* \_SB_.PCI0.SAT0.PSUT */
-                        GSCR = PSCR /* \_SB_.PCI0.SAT0.PSCR */
-                        STM ()
-                        PMRI = GMPT /* \_SB_.PCI0.SAT0.GMPT */
-                        Local0 = GMUE /* \_SB_.PCI0.SAT0.GMUE */
-                        PMUT = GMUT /* \_SB_.PCI0.SAT0.GMUT */
-                        PMCR = GMCR /* \_SB_.PCI0.SAT0.GMCR */
-                        Local1 = GSUE /* \_SB_.PCI0.SAT0.GSUE */
-                        PSUT = GSUT /* \_SB_.PCI0.SAT0.GSUT */
-                        PSCR = GSCR /* \_SB_.PCI0.SAT0.GSCR */
-                        If ((Local0 & One))
+                        Return (Package (0x04)
                         {
-                            PM3E = One
-                        }
-                        Else
-                        {
-                            PM3E = Zero
-                        }
-
-                        If ((Local0 & 0x02))
-                        {
-                            PM6E = One
-                        }
-                        Else
-                        {
-                            PM6E = Zero
-                        }
-
-                        If ((Local0 & 0x04))
-                        {
-                            PMAE = One
-                        }
-                        Else
-                        {
-                            PMAE = Zero
-                        }
-
-                        If ((Local1 & One))
-                        {
-                            PS3E = One
-                        }
-                        Else
-                        {
-                            PS3E = Zero
-                        }
-
-                        If ((Local1 & 0x02))
-                        {
-                            PS6E = One
-                        }
-                        Else
-                        {
-                            PS6E = Zero
-                        }
-
-                        If ((Local1 & 0x04))
-                        {
-                            PSAE = One
-                        }
-                        Else
-                        {
-                            PSAE = Zero
-                        }
-
-                        ATA0 = GTF (Zero, Arg1)
-                        ATA1 = GTF (One, Arg2)
-                    }
-
-                    Device (DRV0)
-                    {
-                        Name (_ADR, Zero)  // _ADR: Address
-                        Method (_GTF, 0, NotSerialized)  // _GTF: Get Task File
-                        {
-                            Return (RATA (ATA0))
-                        }
-                    }
-
-                    Device (DRV1)
-                    {
-                        Name (_ADR, One)  // _ADR: Address
-                        Method (_GTF, 0, NotSerialized)  // _GTF: Get Task File
-                        {
-                            Return (RATA (ATA1))
-                        }
-                    }
-                }
-
-                Device (CHN1)
-                {
-                    Name (_ADR, One)  // _ADR: Address
-                    Method (_GTM, 0, NotSerialized)  // _GTM: Get Timing Mode
-                    {
-                        Local1 = (SSCR << One)
-                        Local0 = (SMCR | Local1)
-                        Local3 = (SMAE << 0x02)
-                        Local4 = (SM6E << One)
-                        Local3 |= Local4
-                        Local1 = (SM3E | Local3)
-                        Local3 = (SMPT << 0x04)
-                        Local1 |= Local3
-                        Local3 = (SSAE << 0x02)
-                        Local4 = (SS6E << One)
-                        Local3 |= Local4
-                        Local2 = (SS3E | Local3)
-                        Local3 = (SSPT << 0x04)
-                        Local2 |= Local3
-                        Return (GTM (SMRI, Local1, SMUT, SSRI, Local2, SSUT, Local0))
-                    }
-
-                    Method (_STM, 3, NotSerialized)  // _STM: Set Timing Mode
-                    {
-                        Debug = Arg0
-                        TMD0 = Arg0
-                        Local3 = (SMAE << 0x02)
-                        Local4 = (SM6E << One)
-                        Local3 |= Local4
-                        Local0 = (SM3E | Local3)
-                        Local3 = (SMPT << 0x04)
-                        Local0 |= Local3
-                        Local3 = (SSAE << 0x02)
-                        Local4 = (SS6E << One)
-                        Local3 |= Local4
-                        Local1 = (SS3E | Local3)
-                        Local3 = (SSPT << 0x04)
-                        Local1 |= Local3
-                        GMPT = SMRI /* \_SB_.PCI0.SAT0.SMRI */
-                        GMUE = Local0
-                        GMUT = SMUT /* \_SB_.PCI0.SAT0.SMUT */
-                        GMCR = SMCR /* \_SB_.PCI0.SAT0.SMCR */
-                        GSPT = SSRI /* \_SB_.PCI0.SAT0.SSRI */
-                        GSUE = Local1
-                        GSUT = SSUT /* \_SB_.PCI0.SAT0.SSUT */
-                        GSCR = SSCR /* \_SB_.PCI0.SAT0.SSCR */
-                        STM ()
-                        SMRI = GMPT /* \_SB_.PCI0.SAT0.GMPT */
-                        Local0 = GMUE /* \_SB_.PCI0.SAT0.GMUE */
-                        SMUT = GMUT /* \_SB_.PCI0.SAT0.GMUT */
-                        SMCR = GMCR /* \_SB_.PCI0.SAT0.GMCR */
-                        Local1 = GSUE /* \_SB_.PCI0.SAT0.GSUE */
-                        SSUT = GSUT /* \_SB_.PCI0.SAT0.GSUT */
-                        SSCR = GSCR /* \_SB_.PCI0.SAT0.GSCR */
-                        If ((Local0 & One))
-                        {
-                            SM3E = One
-                        }
-                        Else
-                        {
-                            SM3E = Zero
-                        }
-
-                        If ((Local0 & 0x02))
-                        {
-                            SM6E = One
-                        }
-                        Else
-                        {
-                            SM6E = Zero
-                        }
-
-                        If ((Local0 & 0x04))
-                        {
-                            SMAE = One
-                        }
-                        Else
-                        {
-                            SMAE = Zero
-                        }
-
-                        If ((Local1 & One))
-                        {
-                            SS3E = One
-                        }
-                        Else
-                        {
-                            SS3E = Zero
-                        }
-
-                        If ((Local1 & 0x02))
-                        {
-                            SS6E = One
-                        }
-                        Else
-                        {
-                            SS6E = Zero
-                        }
-
-                        If ((Local1 & 0x04))
-                        {
-                            SSAE = One
-                        }
-                        Else
-                        {
-                            SSAE = Zero
-                        }
-
-                        ATA2 = GTF (Zero, Arg1)
-                        ATA3 = GTF (One, Arg2)
-                    }
-
-                    Device (DRV0)
-                    {
-                        Name (_ADR, Zero)  // _ADR: Address
-                        Method (_GTF, 0, NotSerialized)  // _GTF: Get Task File
-                        {
-                            Return (RATA (ATA2))
-                        }
-                    }
-
-                    Device (DRV1)
-                    {
-                        Name (_ADR, One)  // _ADR: Address
-                        Method (_GTF, 0, NotSerialized)  // _GTF: Get Task File
-                        {
-                            Return (RATA (ATA3))
-                        }
-                    }
-                }
-
-                Method (GTM, 7, Serialized)
-                {
-                    PIO0 = Ones
-                    PIO1 = Ones
-                    DMA0 = Ones
-                    DMA1 = Ones
-                    CHNF = 0x10
-                    If (REGF){}
-                    Else
-                    {
-                        Return (TMD0) /* \_SB_.PCI0.SAT0.TMD0 */
-                    }
-
-                    If ((Arg1 & 0x20))
-                    {
-                        CHNF |= 0x02
-                    }
-
-                    Local6 = Match (DerefOf (TIM0 [One]), MEQ, Arg0, MTR, Zero, 
-                        Zero)
-                    Local7 = DerefOf (DerefOf (TIM0 [Zero]) [Local6])
-                    DMA0 = Local7
-                    PIO0 = Local7
-                    If ((Arg4 & 0x20))
-                    {
-                        CHNF |= 0x08
-                    }
-
-                    Local6 = Match (DerefOf (TIM0 [0x02]), MEQ, Arg3, MTR, Zero, 
-                        Zero)
-                    Local7 = DerefOf (DerefOf (TIM0 [Zero]) [Local6])
-                    DMA1 = Local7
-                    PIO1 = Local7
-                    If ((Arg1 & 0x07))
-                    {
-                        Local5 = Arg2
-                        If ((Arg1 & 0x02))
-                        {
-                            Local5 += 0x02
-                        }
-
-                        If ((Arg1 & 0x04))
-                        {
-                            Local5 += 0x04
-                        }
-
-                        DMA0 = DerefOf (DerefOf (TIM0 [0x03]) [Local5])
-                        CHNF |= One
-                    }
-
-                    If ((Arg4 & 0x07))
-                    {
-                        Local5 = Arg5
-                        If ((Arg4 & 0x02))
-                        {
-                            Local5 += 0x02
-                        }
-
-                        If ((Arg4 & 0x04))
-                        {
-                            Local5 += 0x04
-                        }
-
-                        DMA1 = DerefOf (DerefOf (TIM0 [0x03]) [Local5])
-                        CHNF |= 0x04
-                    }
-
-                    Debug = TMD0 /* \_SB_.PCI0.SAT0.TMD0 */
-                    Return (TMD0) /* \_SB_.PCI0.SAT0.TMD0 */
-                }
-
-                Method (STM, 0, Serialized)
-                {
-                    If (REGF)
-                    {
-                        GMUE = Zero
-                        GMUT = Zero
-                        GSUE = Zero
-                        GSUT = Zero
-                        If ((CHNF & One))
-                        {
-                            Local0 = Match (DerefOf (TIM0 [0x03]), MLE, DMA0, MTR, Zero, 
-                                Zero)
-                            If ((Local0 > 0x05))
+                            Package (0x04)
                             {
-                                Local0 = 0x05
-                            }
+                                0xFFFF, 
+                                Zero, 
+                                LNKA, 
+                                Zero
+                            }, 
 
-                            GMUT = DerefOf (DerefOf (TIM0 [0x04]) [Local0])
-                            GMUE |= One
-                            If ((Local0 > 0x02))
+                            Package (0x04)
                             {
-                                GMUE |= 0x02
-                            }
+                                0xFFFF, 
+                                One, 
+                                LNKB, 
+                                Zero
+                            }, 
 
-                            If ((Local0 > 0x04))
+                            Package (0x04)
                             {
-                                GMUE &= 0xFD
-                                GMUE |= 0x04
-                            }
-                        }
-                        ElseIf (((PIO0 == Ones) | (PIO0 == Zero)))
-                        {
-                            If (((DMA0 < Ones) & (DMA0 > Zero)))
+                                0xFFFF, 
+                                0x02, 
+                                LNKC, 
+                                Zero
+                            }, 
+
+                            Package (0x04)
                             {
-                                PIO0 = DMA0 /* \_SB_.PCI0.SAT0.DMA0 */
-                                GMUE |= 0x80
+                                0xFFFF, 
+                                0x03, 
+                                LNKD, 
+                                Zero
                             }
-                        }
-
-                        If ((CHNF & 0x04))
-                        {
-                            Local0 = Match (DerefOf (TIM0 [0x03]), MLE, DMA1, MTR, Zero, 
-                                Zero)
-                            If ((Local0 > 0x05))
-                            {
-                                Local0 = 0x05
-                            }
-
-                            GSUT = DerefOf (DerefOf (TIM0 [0x04]) [Local0])
-                            GSUE |= One
-                            If ((Local0 > 0x02))
-                            {
-                                GSUE |= 0x02
-                            }
-
-                            If ((Local0 > 0x04))
-                            {
-                                GSUE &= 0xFD
-                                GSUE |= 0x04
-                            }
-                        }
-                        ElseIf (((PIO1 == Ones) | (PIO1 == Zero)))
-                        {
-                            If (((DMA1 < Ones) & (DMA1 > Zero)))
-                            {
-                                PIO1 = DMA1 /* \_SB_.PCI0.SAT0.DMA1 */
-                                GSUE |= 0x80
-                            }
-                        }
-
-                        If ((CHNF & 0x02))
-                        {
-                            GMUE |= 0x20
-                        }
-
-                        If ((CHNF & 0x08))
-                        {
-                            GSUE |= 0x20
-                        }
-
-                        Local0 = (Match (DerefOf (TIM0 [Zero]), MGE, PIO0, MTR, Zero, 
-                            Zero) & 0x03)
-                        Local1 = DerefOf (DerefOf (TIM0 [One]) [Local0])
-                        GMPT = Local1
-                        If ((Local0 < 0x03))
-                        {
-                            GMUE |= 0x50
-                        }
-
-                        Local0 = (Match (DerefOf (TIM0 [Zero]), MGE, PIO1, MTR, Zero, 
-                            Zero) & 0x03)
-                        Local1 = DerefOf (DerefOf (TIM0 [0x02]) [Local0])
-                        GSPT = Local1
-                        If ((Local0 < 0x03))
-                        {
-                            GSUE |= 0x50
-                        }
-                    }
-                }
-
-                Name (AT01, Buffer (0x07)
-                {
-                     0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0xEF         // .......
-                })
-                Name (AT02, Buffer (0x07)
-                {
-                     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x90         // .......
-                })
-                Name (AT03, Buffer (0x07)
-                {
-                     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xC6         // .......
-                })
-                Name (AT04, Buffer (0x07)
-                {
-                     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x91         // .......
-                })
-                Name (ATA0, Buffer (0x1D){})
-                Name (ATA1, Buffer (0x1D){})
-                Name (ATA2, Buffer (0x1D){})
-                Name (ATA3, Buffer (0x1D){})
-                Name (ATAB, Buffer (0x1D){})
-                CreateByteField (ATAB, Zero, CMDC)
-                Method (GTFB, 3, Serialized)
-                {
-                    Local0 = (CMDC * 0x38)
-                    Local1 = (Local0 + 0x08)
-                    CreateField (ATAB, Local1, 0x38, CMDX)
-                    Local0 = (CMDC * 0x07)
-                    CreateByteField (ATAB, (Local0 + 0x02), A001)
-                    CreateByteField (ATAB, (Local0 + 0x06), A005)
-                    CMDX = Arg0
-                    A001 = Arg1
-                    A005 = Arg2
-                    CMDC++
-                }
-
-                Method (GTF, 2, Serialized)
-                {
-                    Debug = Arg1
-                    CMDC = Zero
-                    Name (ID49, 0x0C00)
-                    Name (ID59, Zero)
-                    Name (ID53, 0x04)
-                    Name (ID63, 0x0F00)
-                    Name (ID88, 0x0F00)
-                    Name (IRDY, One)
-                    Name (PIOT, Zero)
-                    Name (DMAT, Zero)
-                    If ((SizeOf (Arg1) == 0x0200))
-                    {
-                        CreateWordField (Arg1, 0x62, IW49)
-                        ID49 = IW49 /* \_SB_.PCI0.SAT0.GTF_.IW49 */
-                        CreateWordField (Arg1, 0x6A, IW53)
-                        ID53 = IW53 /* \_SB_.PCI0.SAT0.GTF_.IW53 */
-                        CreateWordField (Arg1, 0x7E, IW63)
-                        ID63 = IW63 /* \_SB_.PCI0.SAT0.GTF_.IW63 */
-                        CreateWordField (Arg1, 0x76, IW59)
-                        ID59 = IW59 /* \_SB_.PCI0.SAT0.GTF_.IW59 */
-                        CreateWordField (Arg1, 0xB0, IW88)
-                        ID88 = IW88 /* \_SB_.PCI0.SAT0.GTF_.IW88 */
-                    }
-
-                    Local7 = 0xA0
-                    If (Arg0)
-                    {
-                        Local7 = 0xB0
-                        IRDY = (CHNF & 0x08)
-                        If ((CHNF & 0x10))
-                        {
-                            PIOT = PIO1 /* \_SB_.PCI0.SAT0.PIO1 */
-                        }
-                        Else
-                        {
-                            PIOT = PIO0 /* \_SB_.PCI0.SAT0.PIO0 */
-                        }
-
-                        If ((CHNF & 0x04))
-                        {
-                            If ((CHNF & 0x10))
-                            {
-                                DMAT = DMA1 /* \_SB_.PCI0.SAT0.DMA1 */
-                            }
-                            Else
-                            {
-                                DMAT = DMA0 /* \_SB_.PCI0.SAT0.DMA0 */
-                            }
-                        }
+                        })
                     }
                     Else
                     {
-                        IRDY = (CHNF & 0x02)
-                        PIOT = PIO0 /* \_SB_.PCI0.SAT0.PIO0 */
-                        If ((CHNF & One))
+                        Return (Package (0x04)
                         {
-                            DMAT = DMA0 /* \_SB_.PCI0.SAT0.DMA0 */
-                        }
-                    }
+                            Package (0x04)
+                            {
+                                0xFFFF, 
+                                Zero, 
+                                Zero, 
+                                0x10
+                            }, 
 
-                    If ((((ID53 & 0x04) && (ID88 & 0xFF00)) && DMAT))
-                    {
-                        Local1 = Match (DerefOf (TIM0 [0x03]), MLE, DMAT, MTR, Zero, 
-                            Zero)
-                        If ((Local1 > 0x05))
-                        {
-                            Local1 = 0x05
-                        }
+                            Package (0x04)
+                            {
+                                0xFFFF, 
+                                One, 
+                                Zero, 
+                                0x11
+                            }, 
 
-                        GTFB (AT01, (0x40 | Local1), Local7)
-                    }
-                    ElseIf (((ID63 & 0xFF00) && PIOT))
-                    {
-                        Local0 = (Match (DerefOf (TIM0 [Zero]), MGE, PIOT, MTR, Zero, 
-                            Zero) & 0x03)
-                        Local1 = (0x20 | DerefOf (DerefOf (TIM0 [0x07]) [Local0]))
-                        GTFB (AT01, Local1, Local7)
-                    }
+                            Package (0x04)
+                            {
+                                0xFFFF, 
+                                0x02, 
+                                Zero, 
+                                0x12
+                            }, 
 
-                    If (IRDY)
-                    {
-                        Local0 = (Match (DerefOf (TIM0 [Zero]), MGE, PIOT, MTR, Zero, 
-                            Zero) & 0x03)
-                        Local1 = (0x08 | DerefOf (DerefOf (TIM0 [0x06]) [Local0]))
-                        GTFB (AT01, Local1, Local7)
+                            Package (0x04)
+                            {
+                                0xFFFF, 
+                                0x03, 
+                                Zero, 
+                                0x13
+                            }
+                        })
                     }
-                    ElseIf ((ID49 & 0x0400))
-                    {
-                        GTFB (AT01, One, Local7)
-                    }
-
-                    If (((ID59 & 0x0100) && (ID59 & 0xFF)))
-                    {
-                        GTFB (AT03, (ID59 & 0xFF), Local7)
-                    }
-
-                    Debug = ATAB /* \_SB_.PCI0.SAT0.ATAB */
-                    Return (ATAB) /* \_SB_.PCI0.SAT0.ATAB */
-                }
-
-                Method (RATA, 1, NotSerialized)
-                {
-                    CreateByteField (Arg0, Zero, CMDN)
-                    Local0 = (CMDN * 0x38)
-                    CreateField (Arg0, 0x08, Local0, RETB)
-                    Debug = RETB /* \_SB_.PCI0.SAT0.RATA.RETB */
-                    Return (Concatenate (RETB, FZTF))
                 }
             }
 
             Device (SAT1)
             {
+                Name (_ADR, 0x001F0002)  // _ADR: Address
+                Device (SSD1)
+                {
+                    Name (_ADR, Zero)  // _ADR: Address
+                    Method (_GTF, 0, NotSerialized)  // _GTF: Get Task File
+                    {
+                        Name (PIB0, Buffer (0x07)
+                        {
+                             0x00, 0x00, 0x00, 0x00, 0x00, 0xA0, 0xF5         // .......
+                        })
+                        Return (PIB0) /* \_SB_.PCI0.SAT1.SSD1._GTF.PIB0 */
+                    }
+                }
+
+                Device (SSD2)
+                {
+                    Name (_ADR, One)  // _ADR: Address
+                    Method (_GTF, 0, NotSerialized)  // _GTF: Get Task File
+                    {
+                        Name (PIB1, Buffer (0x07)
+                        {
+                             0x00, 0x00, 0x00, 0x00, 0x00, 0xA0, 0xF5         // .......
+                        })
+                        Return (PIB1) /* \_SB_.PCI0.SAT1.SSD2._GTF.PIB1 */
+                    }
+                }
+
+                Device (BSD1)
+                {
+                    Name (_ADR, 0x02)  // _ADR: Address
+                    Method (_GTF, 0, NotSerialized)  // _GTF: Get Task File
+                    {
+                        Name (PIB2, Buffer (0x07)
+                        {
+                             0x00, 0x00, 0x00, 0x00, 0x00, 0xA0, 0xF5         // .......
+                        })
+                        Return (PIB2) /* \_SB_.PCI0.SAT1.BSD1._GTF.PIB2 */
+                    }
+                }
+
+                Device (BSD2)
+                {
+                    Name (_ADR, 0x03)  // _ADR: Address
+                    Method (_GTF, 0, NotSerialized)  // _GTF: Get Task File
+                    {
+                        Name (PIB3, Buffer (0x07)
+                        {
+                             0x00, 0x00, 0x00, 0x00, 0x00, 0xA0, 0xF5         // .......
+                        })
+                        Return (PIB3) /* \_SB_.PCI0.SAT1.BSD2._GTF.PIB3 */
+                    }
+                }
+
+                Device (BSD3)
+                {
+                    Name (_ADR, 0x04)  // _ADR: Address
+                    Method (_GTF, 0, NotSerialized)  // _GTF: Get Task File
+                    {
+                        Name (PIB4, Buffer (0x07)
+                        {
+                             0x00, 0x00, 0x00, 0x00, 0x00, 0xA0, 0xF5         // .......
+                        })
+                        Return (PIB4) /* \_SB_.PCI0.SAT1.BSD3._GTF.PIB4 */
+                    }
+                }
+
+                Device (BSD4)
+                {
+                    Name (_ADR, 0x05)  // _ADR: Address
+                    Method (_GTF, 0, NotSerialized)  // _GTF: Get Task File
+                    {
+                        Name (PIB5, Buffer (0x07)
+                        {
+                             0x00, 0x00, 0x00, 0x00, 0x00, 0xA0, 0xF5         // .......
+                        })
+                        Return (PIB5) /* \_SB_.PCI0.SAT1.BSD4._GTF.PIB5 */
+                    }
+                }
+            }
+
+            Device (SAT2)
+            {
                 Name (_ADR, 0x001F0005)  // _ADR: Address
+                Device (FSD1)
+                {
+                    Name (_ADR, Zero)  // _ADR: Address
+                    Method (_GTF, 0, NotSerialized)  // _GTF: Get Task File
+                    {
+                        Name (PIB0, Buffer (0x07)
+                        {
+                             0x00, 0x00, 0x00, 0x00, 0x00, 0xA0, 0xF5         // .......
+                        })
+                        Return (PIB0) /* \_SB_.PCI0.SAT2.FSD1._GTF.PIB0 */
+                    }
+                }
+
+                Device (FSD2)
+                {
+                    Name (_ADR, One)  // _ADR: Address
+                    Method (_GTF, 0, NotSerialized)  // _GTF: Get Task File
+                    {
+                        Name (PIB1, Buffer (0x07)
+                        {
+                             0x00, 0x00, 0x00, 0x00, 0x00, 0xA0, 0xF5         // .......
+                        })
+                        Return (PIB1) /* \_SB_.PCI0.SAT2.FSD2._GTF.PIB1 */
+                    }
+                }
             }
 
             Device (SMB)
@@ -4371,7 +3823,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                 Device (HUBN)
                 {
                     Name (_ADR, Zero)  // _ADR: Address
-                    Device (PR10)
+                    Device (PRB0)
                     {
                         Name (_ADR, One)  // _ADR: Address
                         Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
@@ -4383,7 +3835,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                                 Zero, 
                                 Zero
                             })
-                            Return (UPCA) /* \_SB_.PCI0.EUSB.HUBN.PR10._UPC.UPCA */
+                            Return (UPCA) /* \_SB_.PCI0.EUSB.HUBN.PRB0._UPC.UPCA */
                         }
 
                         Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
@@ -4396,10 +3848,10 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                                     /* 0008 */  0x30, 0x1C, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00   // 0.......
                                 }
                             })
-                            Return (PLDP) /* \_SB_.PCI0.EUSB.HUBN.PR10._PLD.PLDP */
+                            Return (PLDP) /* \_SB_.PCI0.EUSB.HUBN.PRB0._PLD.PLDP */
                         }
 
-                        Device (PR30)
+                        Device (PRB1)
                         {
                             Name (_ADR, One)  // _ADR: Address
                             Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
@@ -4411,7 +3863,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                                     Zero, 
                                     Zero
                                 })
-                                Return (UPCP) /* \_SB_.PCI0.EUSB.HUBN.PR10.PR30._UPC.UPCP */
+                                Return (UPCP) /* \_SB_.PCI0.EUSB.HUBN.PRB0.PRB1._UPC.UPCP */
                             }
 
                             Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
@@ -4424,11 +3876,11 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                                         /* 0008 */  0xE1, 0x1C, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00   // ........
                                     }
                                 })
-                                Return (PLDP) /* \_SB_.PCI0.EUSB.HUBN.PR10.PR30._PLD.PLDP */
+                                Return (PLDP) /* \_SB_.PCI0.EUSB.HUBN.PRB0.PRB1._PLD.PLDP */
                             }
                         }
 
-                        Device (PR31)
+                        Device (PRB2)
                         {
                             Name (_ADR, 0x02)  // _ADR: Address
                             Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
@@ -4440,7 +3892,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                                     Zero, 
                                     Zero
                                 })
-                                Return (UPCP) /* \_SB_.PCI0.EUSB.HUBN.PR10.PR31._UPC.UPCP */
+                                Return (UPCP) /* \_SB_.PCI0.EUSB.HUBN.PRB0.PRB2._UPC.UPCP */
                             }
 
                             Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
@@ -4453,11 +3905,11 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                                         /* 0008 */  0xE1, 0x1D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00   // ........
                                     }
                                 })
-                                Return (PLDP) /* \_SB_.PCI0.EUSB.HUBN.PR10.PR31._PLD.PLDP */
+                                Return (PLDP) /* \_SB_.PCI0.EUSB.HUBN.PRB0.PRB2._PLD.PLDP */
                             }
                         }
 
-                        Device (PR32)
+                        Device (PRB3)
                         {
                             Name (_ADR, 0x03)  // _ADR: Address
                             Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
@@ -4469,7 +3921,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                                     Zero, 
                                     Zero
                                 })
-                                Return (UPCP) /* \_SB_.PCI0.EUSB.HUBN.PR10.PR32._UPC.UPCP */
+                                Return (UPCP) /* \_SB_.PCI0.EUSB.HUBN.PRB0.PRB3._UPC.UPCP */
                             }
 
                             Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
@@ -4482,11 +3934,11 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                                         /* 0008 */  0xE1, 0x1D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00   // ........
                                     }
                                 })
-                                Return (PLDP) /* \_SB_.PCI0.EUSB.HUBN.PR10.PR32._PLD.PLDP */
+                                Return (PLDP) /* \_SB_.PCI0.EUSB.HUBN.PRB0.PRB3._PLD.PLDP */
                             }
                         }
 
-                        Device (PR33)
+                        Device (PRB4)
                         {
                             Name (_ADR, 0x04)  // _ADR: Address
                             Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
@@ -4498,7 +3950,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                                     Zero, 
                                     Zero
                                 })
-                                Return (UPCP) /* \_SB_.PCI0.EUSB.HUBN.PR10.PR33._UPC.UPCP */
+                                Return (UPCP) /* \_SB_.PCI0.EUSB.HUBN.PRB0.PRB4._UPC.UPCP */
                             }
 
                             Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
@@ -4511,11 +3963,11 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                                         /* 0008 */  0xE1, 0x1E, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00   // ........
                                     }
                                 })
-                                Return (PLDP) /* \_SB_.PCI0.EUSB.HUBN.PR10.PR33._PLD.PLDP */
+                                Return (PLDP) /* \_SB_.PCI0.EUSB.HUBN.PRB0.PRB4._PLD.PLDP */
                             }
                         }
 
-                        Device (PR34)
+                        Device (PRB5)
                         {
                             Name (_ADR, 0x05)  // _ADR: Address
                             Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
@@ -4527,7 +3979,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                                     Zero, 
                                     Zero
                                 })
-                                Return (UPCP) /* \_SB_.PCI0.EUSB.HUBN.PR10.PR34._UPC.UPCP */
+                                Return (UPCP) /* \_SB_.PCI0.EUSB.HUBN.PRB0.PRB5._UPC.UPCP */
                             }
 
                             Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
@@ -4540,11 +3992,11 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                                         /* 0008 */  0xB1, 0x1E, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00   // ........
                                     }
                                 })
-                                Return (PLDP) /* \_SB_.PCI0.EUSB.HUBN.PR10.PR34._PLD.PLDP */
+                                Return (PLDP) /* \_SB_.PCI0.EUSB.HUBN.PRB0.PRB5._PLD.PLDP */
                             }
                         }
 
-                        Device (PR35)
+                        Device (PRB6)
                         {
                             Name (_ADR, 0x06)  // _ADR: Address
                             Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
@@ -4556,7 +4008,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                                     Zero, 
                                     Zero
                                 })
-                                Return (UPCP) /* \_SB_.PCI0.EUSB.HUBN.PR10.PR35._UPC.UPCP */
+                                Return (UPCP) /* \_SB_.PCI0.EUSB.HUBN.PRB0.PRB6._UPC.UPCP */
                             }
 
                             Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
@@ -4569,11 +4021,11 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                                         /* 0008 */  0xB1, 0x1E, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00   // ........
                                     }
                                 })
-                                Return (PLDP) /* \_SB_.PCI0.EUSB.HUBN.PR10.PR35._PLD.PLDP */
+                                Return (PLDP) /* \_SB_.PCI0.EUSB.HUBN.PRB0.PRB6._PLD.PLDP */
                             }
                         }
 
-                        Device (PR36)
+                        Device (PRB7)
                         {
                             Name (_ADR, 0x07)  // _ADR: Address
                             Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
@@ -4585,7 +4037,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                                     Zero, 
                                     Zero
                                 })
-                                Return (UPCP) /* \_SB_.PCI0.EUSB.HUBN.PR10.PR36._UPC.UPCP */
+                                Return (UPCP) /* \_SB_.PCI0.EUSB.HUBN.PRB0.PRB7._UPC.UPCP */
                             }
 
                             Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
@@ -4598,11 +4050,11 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                                         /* 0008 */  0xB1, 0x1E, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00   // ........
                                     }
                                 })
-                                Return (PLDP) /* \_SB_.PCI0.EUSB.HUBN.PR10.PR36._PLD.PLDP */
+                                Return (PLDP) /* \_SB_.PCI0.EUSB.HUBN.PRB0.PRB7._PLD.PLDP */
                             }
                         }
 
-                        Device (PR37)
+                        Device (PRB8)
                         {
                             Name (_ADR, 0x08)  // _ADR: Address
                             Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
@@ -4614,7 +4066,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                                     Zero, 
                                     Zero
                                 })
-                                Return (UPCP) /* \_SB_.PCI0.EUSB.HUBN.PR10.PR37._UPC.UPCP */
+                                Return (UPCP) /* \_SB_.PCI0.EUSB.HUBN.PRB0.PRB8._UPC.UPCP */
                             }
 
                             Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
@@ -4627,7 +4079,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                                         /* 0008 */  0xB1, 0x1E, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00   // ........
                                     }
                                 })
-                                Return (PLDP) /* \_SB_.PCI0.EUSB.HUBN.PR10.PR37._PLD.PLDP */
+                                Return (PLDP) /* \_SB_.PCI0.EUSB.HUBN.PRB0.PRB8._PLD.PLDP */
                             }
                         }
                     }
@@ -4649,7 +4101,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                 Device (HUBN)
                 {
                     Name (_ADR, Zero)  // _ADR: Address
-                    Device (PR10)
+                    Device (PRC0)
                     {
                         Name (_ADR, One)  // _ADR: Address
                         Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
@@ -4661,7 +4113,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                                 Zero, 
                                 Zero
                             })
-                            Return (UPCP) /* \_SB_.PCI0.USBE.HUBN.PR10._UPC.UPCP */
+                            Return (UPCP) /* \_SB_.PCI0.USBE.HUBN.PRC0._UPC.UPCP */
                         }
 
                         Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
@@ -4674,10 +4126,10 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                                     /* 0008 */  0x30, 0x1C, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00   // 0.......
                                 }
                             })
-                            Return (PLDP) /* \_SB_.PCI0.USBE.HUBN.PR10._PLD.PLDP */
+                            Return (PLDP) /* \_SB_.PCI0.USBE.HUBN.PRC0._PLD.PLDP */
                         }
 
-                        Device (PR30)
+                        Device (PRC1)
                         {
                             Name (_ADR, One)  // _ADR: Address
                             Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
@@ -4689,7 +4141,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                                     Zero, 
                                     Zero
                                 })
-                                Return (UPCP) /* \_SB_.PCI0.USBE.HUBN.PR10.PR30._UPC.UPCP */
+                                Return (UPCP) /* \_SB_.PCI0.USBE.HUBN.PRC0.PRC1._UPC.UPCP */
                             }
 
                             Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
@@ -4702,11 +4154,11 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                                         /* 0008 */  0xE1, 0x1C, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00   // ........
                                     }
                                 })
-                                Return (PLDP) /* \_SB_.PCI0.USBE.HUBN.PR10.PR30._PLD.PLDP */
+                                Return (PLDP) /* \_SB_.PCI0.USBE.HUBN.PRC0.PRC1._PLD.PLDP */
                             }
                         }
 
-                        Device (PR31)
+                        Device (PRC2)
                         {
                             Name (_ADR, 0x02)  // _ADR: Address
                             Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
@@ -4718,7 +4170,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                                     Zero, 
                                     Zero
                                 })
-                                Return (UPCP) /* \_SB_.PCI0.USBE.HUBN.PR10.PR31._UPC.UPCP */
+                                Return (UPCP) /* \_SB_.PCI0.USBE.HUBN.PRC0.PRC2._UPC.UPCP */
                             }
 
                             Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
@@ -4731,11 +4183,11 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                                         /* 0008 */  0xE1, 0x1D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00   // ........
                                     }
                                 })
-                                Return (PLDP) /* \_SB_.PCI0.USBE.HUBN.PR10.PR31._PLD.PLDP */
+                                Return (PLDP) /* \_SB_.PCI0.USBE.HUBN.PRC0.PRC2._PLD.PLDP */
                             }
                         }
 
-                        Device (PR32)
+                        Device (PRC3)
                         {
                             Name (_ADR, 0x03)  // _ADR: Address
                             Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
@@ -4747,7 +4199,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                                     Zero, 
                                     Zero
                                 })
-                                Return (UPCP) /* \_SB_.PCI0.USBE.HUBN.PR10.PR32._UPC.UPCP */
+                                Return (UPCP) /* \_SB_.PCI0.USBE.HUBN.PRC0.PRC3._UPC.UPCP */
                             }
 
                             Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
@@ -4760,11 +4212,11 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                                         /* 0008 */  0xE1, 0x1D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00   // ........
                                     }
                                 })
-                                Return (PLDP) /* \_SB_.PCI0.USBE.HUBN.PR10.PR32._PLD.PLDP */
+                                Return (PLDP) /* \_SB_.PCI0.USBE.HUBN.PRC0.PRC3._PLD.PLDP */
                             }
                         }
 
-                        Device (PR33)
+                        Device (PRC4)
                         {
                             Name (_ADR, 0x04)  // _ADR: Address
                             Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
@@ -4776,7 +4228,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                                     Zero, 
                                     Zero
                                 })
-                                Return (UPCP) /* \_SB_.PCI0.USBE.HUBN.PR10.PR33._UPC.UPCP */
+                                Return (UPCP) /* \_SB_.PCI0.USBE.HUBN.PRC0.PRC4._UPC.UPCP */
                             }
 
                             Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
@@ -4789,11 +4241,11 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                                         /* 0008 */  0xE1, 0x1E, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00   // ........
                                     }
                                 })
-                                Return (PLDP) /* \_SB_.PCI0.USBE.HUBN.PR10.PR33._PLD.PLDP */
+                                Return (PLDP) /* \_SB_.PCI0.USBE.HUBN.PRC0.PRC4._PLD.PLDP */
                             }
                         }
 
-                        Device (PR34)
+                        Device (PRC5)
                         {
                             Name (_ADR, 0x05)  // _ADR: Address
                             Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
@@ -4805,7 +4257,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                                     Zero, 
                                     Zero
                                 })
-                                Return (UPCP) /* \_SB_.PCI0.USBE.HUBN.PR10.PR34._UPC.UPCP */
+                                Return (UPCP) /* \_SB_.PCI0.USBE.HUBN.PRC0.PRC5._UPC.UPCP */
                             }
 
                             Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
@@ -4818,11 +4270,11 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                                         /* 0008 */  0xB1, 0x1E, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00   // ........
                                     }
                                 })
-                                Return (PLDP) /* \_SB_.PCI0.USBE.HUBN.PR10.PR34._PLD.PLDP */
+                                Return (PLDP) /* \_SB_.PCI0.USBE.HUBN.PRC0.PRC5._PLD.PLDP */
                             }
                         }
 
-                        Device (PR35)
+                        Device (PRC6)
                         {
                             Name (_ADR, 0x06)  // _ADR: Address
                             Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
@@ -4834,7 +4286,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                                     Zero, 
                                     Zero
                                 })
-                                Return (UPCP) /* \_SB_.PCI0.USBE.HUBN.PR10.PR35._UPC.UPCP */
+                                Return (UPCP) /* \_SB_.PCI0.USBE.HUBN.PRC0.PRC6._UPC.UPCP */
                             }
 
                             Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
@@ -4847,7 +4299,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                                         /* 0008 */  0xE1, 0x1E, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00   // ........
                                     }
                                 })
-                                Return (PLDP) /* \_SB_.PCI0.USBE.HUBN.PR10.PR35._PLD.PLDP */
+                                Return (PLDP) /* \_SB_.PCI0.USBE.HUBN.PRC0.PRC6._PLD.PLDP */
                             }
                         }
                     }
@@ -4900,7 +4352,11 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
 
                 Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
                 {
-                    Return (GPRW (0x09, 0x04))
+                    Return (Package (0x02)
+                    {
+                        0x09, 
+                        0x04
+                    })
                 }
 
                 Method (_PRT, 0, NotSerialized)  // _PRT: PCI Routing Table
@@ -4955,7 +4411,11 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
 
                 Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
                 {
-                    Return (GPRW (0x09, 0x04))
+                    Return (Package (0x02)
+                    {
+                        0x09, 
+                        0x04
+                    })
                 }
 
                 Method (_PRT, 0, NotSerialized)  // _PRT: PCI Routing Table
@@ -4966,30 +4426,6 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                     }
 
                     Return (PR02) /* \_SB_.PR02 */
-                }
-
-                Device (WIFI)
-                {
-                    Name (_ADR, Zero)  // _ADR: Address
-                    Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
-                    {
-                        Local0 = Package (0x04)
-                            {
-                                "built-in", 
-                                Buffer (One)
-                                {
-                                     0x01                                             // .
-                                }, 
-
-                                "location", 
-                                Buffer (0x02)
-                                {
-                                    "1"
-                                }
-                            }
-                        DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
-                        Return (Local0)
-                    }
                 }
             }
 
@@ -5034,7 +4470,11 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
 
                 Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
                 {
-                    Return (GPRW (0x09, 0x04))
+                    Return (Package (0x02)
+                    {
+                        0x09, 
+                        0x04
+                    })
                 }
 
                 Method (_PRT, 0, NotSerialized)  // _PRT: PCI Routing Table
@@ -5045,30 +4485,6 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                     }
 
                     Return (PR03) /* \_SB_.PR03 */
-                }
-
-                Device (LAN0)
-                {
-                    Name (_ADR, Zero)  // _ADR: Address
-                    Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
-                    {
-                        Local0 = Package (0x04)
-                            {
-                                "built-in", 
-                                Buffer (One)
-                                {
-                                     0x01                                             // .
-                                }, 
-
-                                "location", 
-                                Buffer (0x02)
-                                {
-                                    "1"
-                                }
-                            }
-                        DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
-                        Return (Local0)
-                    }
                 }
             }
 
@@ -5113,7 +4529,11 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
 
                 Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
                 {
-                    Return (GPRW (0x09, 0x04))
+                    Return (Package (0x02)
+                    {
+                        0x09, 
+                        0x04
+                    })
                 }
 
                 Method (_PRT, 0, NotSerialized)  // _PRT: PCI Routing Table
@@ -5124,11 +4544,6 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                     }
 
                     Return (PR04) /* \_SB_.PR04 */
-                }
-
-                Device (XHCI)
-                {
-                    Name (_ADR, Zero)  // _ADR: Address
                 }
             }
 
@@ -5173,7 +4588,11 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
 
                 Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
                 {
-                    Return (GPRW (0x09, 0x04))
+                    Return (Package (0x02)
+                    {
+                        0x09, 
+                        0x04
+                    })
                 }
 
                 Method (_PRT, 0, NotSerialized)  // _PRT: PCI Routing Table
@@ -5228,7 +4647,11 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
 
                 Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
                 {
-                    Return (GPRW (0x09, 0x04))
+                    Return (Package (0x02)
+                    {
+                        0x09, 
+                        0x04
+                    })
                 }
             }
 
@@ -5273,7 +4696,11 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
 
                 Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
                 {
-                    Return (GPRW (0x09, 0x04))
+                    Return (Package (0x02)
+                    {
+                        0x09, 
+                        0x04
+                    })
                 }
 
                 Method (_PRT, 0, NotSerialized)  // _PRT: PCI Routing Table
@@ -5328,7 +4755,11 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
 
                 Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
                 {
-                    Return (GPRW (0x09, 0x04))
+                    Return (Package (0x02)
+                    {
+                        0x09, 
+                        0x04
+                    })
                 }
 
                 Method (_PRT, 0, NotSerialized)  // _PRT: PCI Routing Table
@@ -5345,32 +4776,86 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
             Device (BR33)
             {
                 Name (_ADR, 0x00110000)  // _ADR: Address
+                Method (_PRT, 0, NotSerialized)  // _PRT: PCI Routing Table
+                {
+                    If ((PICM == Zero))
+                    {
+                        Return (Package (0x02)
+                        {
+                            Package (0x04)
+                            {
+                                0xFFFF, 
+                                Zero, 
+                                LNKA, 
+                                Zero
+                            }, 
+
+                            Package (0x04)
+                            {
+                                0xFFFF, 
+                                0x02, 
+                                LNKC, 
+                                Zero
+                            }
+                        })
+                    }
+                    Else
+                    {
+                        Return (Package (0x02)
+                        {
+                            Package (0x04)
+                            {
+                                0xFFFF, 
+                                Zero, 
+                                Zero, 
+                                0x10
+                            }, 
+
+                            Package (0x04)
+                            {
+                                0xFFFF, 
+                                0x02, 
+                                Zero, 
+                                0x12
+                            }
+                        })
+                    }
+                }
+
+                Device (SCU0)
+                {
+                    Name (_ADR, Zero)  // _ADR: Address
+                }
+
+                Device (ESM0)
+                {
+                    Name (_ADR, 0x03)  // _ADR: Address
+                }
             }
 
-            Device (GBE)
+            Device (GLAN)
             {
                 Name (_ADR, 0x00190000)  // _ADR: Address
                 Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
                 {
-                    Return (GPRW (0x0D, 0x04))
+                    Return (Package (0x02)
+                    {
+                        0x0D, 
+                        0x04
+                    })
                 }
             }
 
             Device (NPE1)
             {
-                Name (_ADR, 0x00010000)  // _ADR: Address
-                Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
-                {
-                    Return (GPRW (0x09, 0x04))
-                }
-            }
-
-            Device (NPE2)
-            {
                 Name (_ADR, 0x00010001)  // _ADR: Address
                 Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
                 {
-                    Return (GPRW (0x09, 0x04))
+                    Return (Package (0x02)
+                    {
+                        0x09, 
+                        0x04
+                    })
                 }
 
                 Method (_PRT, 0, NotSerialized)  // _PRT: PCI Routing Table
@@ -5384,12 +4869,191 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                 }
             }
 
+            Device (NPE2)
+            {
+                Name (_ADR, 0x00020001)  // _ADR: Address
+                Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
+                {
+                    Return (Package (0x02)
+                    {
+                        0x09, 
+                        0x04
+                    })
+                }
+            }
+
             Device (NPE3)
+            {
+                Name (_ADR, 0x00020002)  // _ADR: Address
+                Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
+                {
+                    Return (Package (0x02)
+                    {
+                        0x09, 
+                        0x04
+                    })
+                }
+            }
+
+            Device (NPE4)
+            {
+                Name (_ADR, 0x00020003)  // _ADR: Address
+                Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
+                {
+                    Return (Package (0x02)
+                    {
+                        0x09, 
+                        0x04
+                    })
+                }
+            }
+
+            Device (NPE5)
+            {
+                Name (_ADR, 0x00030001)  // _ADR: Address
+                Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
+                {
+                    Return (Package (0x02)
+                    {
+                        0x09, 
+                        0x04
+                    })
+                }
+            }
+
+            Device (NPE6)
+            {
+                Name (_ADR, 0x00030002)  // _ADR: Address
+                Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
+                {
+                    Return (Package (0x02)
+                    {
+                        0x09, 
+                        0x04
+                    })
+                }
+            }
+
+            Device (NPE7)
+            {
+                Name (_ADR, 0x00030003)  // _ADR: Address
+                Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
+                {
+                    Return (Package (0x02)
+                    {
+                        0x09, 
+                        0x04
+                    })
+                }
+            }
+
+            Device (NPE8)
+            {
+                Name (_ADR, 0x00050000)  // _ADR: Address
+                Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
+                {
+                    Return (Package (0x02)
+                    {
+                        0x09, 
+                        0x04
+                    })
+                }
+            }
+
+            Device (NPE9)
+            {
+                Name (_ADR, 0x00050002)  // _ADR: Address
+                Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
+                {
+                    Return (Package (0x02)
+                    {
+                        0x09, 
+                        0x04
+                    })
+                }
+            }
+
+            Device (NPEA)
+            {
+                Name (_ADR, 0x00050004)  // _ADR: Address
+                Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
+                {
+                    Return (Package (0x02)
+                    {
+                        0x09, 
+                        0x04
+                    })
+                }
+            }
+
+            Device (MCHC)
+            {
+                Name (_ADR, Zero)  // _ADR: Address
+                Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
+                {
+                    Return (Package (0x02)
+                    {
+                        0x09, 
+                        0x04
+                    })
+                }
+            }
+
+            Device (HECI)
+            {
+                Name (_ADR, 0x00160000)  // _ADR: Address
+            }
+            Device (HEC2)
+            {
+                Name (_ADR, 0x00160001)  // _ADR: Address
+            }
+
+            Device (MEID)
+            {
+                Name (_ADR, 0x00160002)  // _ADR: Address
+            }
+
+            Device (MEKT)
+            {
+                Name (_ADR, 0x00160003)  // _ADR: Address
+            }
+
+            Device (HDEF)
+            {
+                Name (_ADR, 0x001B0000)  // _ADR: Address
+                Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
+                {
+                    Return (Package (0x02)
+                    {
+                        0x09, 
+                        0x04
+                    })
+                }
+            }
+
+            Device (PEG0)
+            {
+                Name (_ADR, 0x00010000)  // _ADR: Address
+                Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
+                {
+                    Return (Package (0x02)
+                    {
+                        0x09, 
+                        0x04
+                    })
+                }
+            }
+
+            Device (GFXA)
             {
                 Name (_ADR, 0x00020000)  // _ADR: Address
                 Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
                 {
-                    Return (GPRW (0x09, 0x04))
+                    Return (Package (0x02)
+                    {
+                        0x09, 
+                        0x04
+                    })
                 }
 
                 Method (_PRT, 0, NotSerialized)  // _PRT: PCI Routing Table
@@ -5401,51 +5065,18 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
 
                     Return (PR23) /* \_SB_.PR23 */
                 }
-
-                Device (GFX0)
-                {
-                    Name (_ADR, Zero)  // _ADR: Address
-                }
-
-                Device (HDAU)
-                {
-                    Name (_ADR, One)  // _ADR: Address
-                }
             }
 
-            Device (NPE4)
-            {
-                Name (_ADR, 0x00020001)  // _ADR: Address
-                Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
-                {
-                    Return (GPRW (0x09, 0x04))
-                }
-            }
-
-            Device (NPE5)
-            {
-                Name (_ADR, 0x00020002)  // _ADR: Address
-                Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
-                {
-                    Return (GPRW (0x09, 0x04))
-                }
-            }
-
-            Device (NPE6)
-            {
-                Name (_ADR, 0x00020003)  // _ADR: Address
-                Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
-                {
-                    Return (GPRW (0x09, 0x04))
-                }
-            }
-
-            Device (NPE7)
+            Device (GFXB)
             {
                 Name (_ADR, 0x00030000)  // _ADR: Address
                 Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
                 {
-                    Return (GPRW (0x09, 0x04))
+                    Return (Package (0x02)
+                    {
+                        0x09, 
+                        0x04
+                    })
                 }
 
                 Method (_PRT, 0, NotSerialized)  // _PRT: PCI Routing Table
@@ -5457,46 +5088,6 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
 
                     Return (PR27) /* \_SB_.PR27 */
                 }
-
-                Device (GFX1)
-                {
-                    Name (_ADR, Zero)  // _ADR: Address
-                }
-
-                Device (HDAU)
-                {
-                    Name (_ADR, One)  // _ADR: Address
-                }
-            }
-
-            Device (NPE8)
-            {
-                Name (_ADR, 0x00050000)  // _ADR: Address
-            }
-
-            Device (NPE9)
-            {
-                Name (_ADR, 0x00050002)  // _ADR: Address
-            }
-
-            Device (NPEA)
-            {
-                Name (_ADR, 0x00050004)  // _ADR: Address
-            }
-
-            Device (MCHC)
-            {
-                Name (_ADR, Zero)  // _ADR: Address
-            }
-
-            Device (IMEI)
-            {
-                Name (_ADR, 0x00160000)  // _ADR: Address
-            }
-
-            Device (HDEF)
-            {
-                Name (_ADR, 0x001B0000)  // _ADR: Address
             }
         }
 
@@ -5519,7 +5110,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                 Notify (\_SB.PCI0.EUSB, 0x02) // Device Wake
                 Notify (\_SB.PCI0.USBE, 0x02) // Device Wake
                 Notify (\_SB.PCI0.PEX3.XHCI, 0x02) // Device Wake
-                Notify (\_SB.PCI0.GBE, 0x02) // Device Wake
+                Notify (\_SB.PCI0.GLAN, 0x02) // Device Wake
                 Notify (\_SB.PWRB, 0x02) // Device Wake
             }
 
@@ -5543,6 +5134,9 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                 Notify (\_SB.PCI0.NPE8, 0x02) // Device Wake
                 Notify (\_SB.PCI0.NPE9, 0x02) // Device Wake
                 Notify (\_SB.PCI0.NPEA, 0x02) // Device Wake
+                Notify (\_SB.PCI0.MCHC, 0x02) // Device Wake
+                Notify (\_SB.PCI0.HDEF, 0x02) // Device Wake
+                Notify (\_SB.PCI0.PEG0, 0x02) // Device Wake
             }
         }
 
@@ -6218,7 +5812,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                     Memory32Fixed (ReadWrite,
                         0xFED00000,         // Address Base
                         0x00000400,         // Address Length
-                        _Y21)
+                        _Y22)
                 })
                 OperationRegion (HCNT, SystemMemory, HPTC, 0x04)
                 Field (HCNT, DWordAcc, NoLock, Preserve)
@@ -6242,7 +5836,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
 
                 Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
                 {
-                    CreateDWordField (CRS, \_SB.PCI0.HPET._Y21._BAS, HTBS)  // _BAS: Base Address
+                    CreateDWordField (CRS, \_SB.PCI0.HPET._Y22._BAS, HTBS)  // _BAS: Base Address
                     Local0 = (HPTS * 0x1000)
                     HTBS = (Local0 + 0xFED00000)
                     Return (CRS) /* \_SB_.PCI0.HPET.CRS_ */
@@ -6311,9 +5905,17 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
         Name (_UID, One)  // _UID: Unique ID
     }
 
-    Device (_SB.TPM)
+    Device (_SB.PCI0.LPCB.TPM)
     {
-        Name (_HID, Zero)  // _HID: Hardware ID
+        Method (_HID, 0, NotSerialized)  // _HID: Hardware ID
+        {
+            If (TCMF){}
+            Else
+            {
+                Return (0x0201D824)
+            }
+        }
+
         Name (_CID, EisaId ("PNP0C31"))  // _CID: Compatible ID
         Name (_STR, Unicode ("TPM 1.2 Device"))  // _STR: Description String
         Name (_UID, One)  // _UID: Unique ID
@@ -6350,7 +5952,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
         }
     }
 
-    Scope (_SB.TPM)
+    Scope (_SB.PCI0.LPCB.TPM)
     {
         OperationRegion (ASMI, SystemIO, SMIA, One)
         Field (ASMI, ByteAcc, NoLock, Preserve)
@@ -6420,8 +6022,8 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                         Return (One)
                     }
 
-                    PPI1 [One] = DAT /* \_SB_.TPM_.DAT_ */
-                    Return (PPI1) /* \_SB_.TPM_._DSM.PPI1 */
+                    PPI1 [One] = DAT /* \_SB_.PCI0.LPCB.TPM_.DAT_ */
+                    Return (PPI1) /* \_SB_.PCI0.LPCB.TPM_._DSM.PPI1 */
                 }
                 ElseIf ((_T_0 == 0x04))
                 {
@@ -6437,7 +6039,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                     })
                     DAT = 0x21
                     INQ = OFST /* \OFST */
-                    PPI2 [One] = DAT /* \_SB_.TPM_.DAT_ */
+                    PPI2 [One] = DAT /* \_SB_.PCI0.LPCB.TPM_.DAT_ */
                     If ((DAT == 0xFF))
                     {
                         Return (0x02)
@@ -6457,7 +6059,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                         If ((DAT == 0xFF))
                         {
                             PPI2 [0x02] = 0xFFFFFFF0
-                            Return (PPI2) /* \_SB_.TPM_._DSM.PPI2 */
+                            Return (PPI2) /* \_SB_.PCI0.LPCB.TPM_._DSM.PPI2 */
                         }
                     }
                     ElseIf ((DAT == 0xF1))
@@ -6467,15 +6069,15 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                         If ((DAT == 0xFF))
                         {
                             PPI2 [0x02] = 0xFFFFFFF1
-                            Return (PPI2) /* \_SB_.TPM_._DSM.PPI2 */
+                            Return (PPI2) /* \_SB_.PCI0.LPCB.TPM_._DSM.PPI2 */
                         }
                     }
                     Else
                     {
-                        PPI2 [0x02] = DAT /* \_SB_.TPM_.DAT_ */
+                        PPI2 [0x02] = DAT /* \_SB_.PCI0.LPCB.TPM_.DAT_ */
                     }
 
-                    Return (PPI2) /* \_SB_.TPM_._DSM.PPI2 */
+                    Return (PPI2) /* \_SB_.PCI0.LPCB.TPM_._DSM.PPI2 */
                 }
                 ElseIf ((_T_0 == 0x06))
                 {
@@ -6514,7 +6116,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                     INQ = OFST /* \OFST */
                     DAT = TMF2 /* \TMF2 */
                     INQ = OFST /* \OFST */
-                    Return (DAT) /* \_SB_.TPM_.DAT_ */
+                    Return (DAT) /* \_SB_.PCI0.LPCB.TPM_.DAT_ */
                 }
                 Else
                 {
@@ -6604,16 +6206,16 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
         Name (P2BM, 0x3FFFFFFF)
         Name (P3BM, 0x3FFFFFFF)
         Name (CUU0, Zero)
-        Name (CUU1, One)
-        Name (CUU2, 0x02)
-        Name (CUU3, 0x03)
+        Name (CUU1, Zero)
+        Name (CUU2, Zero)
+        Name (CUU3, Zero)
         Method (PSTA, 1, NotSerialized)
         {
             If ((Arg0 == Zero))
             {
                 If (NPB0)
                 {
-                    Return (0x0F)
+                    Return (0x18)
                 }
                 Else
                 {
@@ -6625,7 +6227,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
             {
                 If (NPB1)
                 {
-                    Return (0x0F)
+                    Return (0x18)
                 }
                 Else
                 {
@@ -6637,7 +6239,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
             {
                 If (NPB2)
                 {
-                    Return (0x0F)
+                    Return (0x18)
                 }
                 Else
                 {
@@ -6649,7 +6251,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
             {
                 If (NPB3)
                 {
-                    Return (0x0F)
+                    Return (0x18)
                 }
                 Else
                 {
@@ -6707,7 +6309,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                 }
                 Else
                 {
-                    Return (0x0F)
+                    Return (0x18)
                 }
             }
         }
@@ -6725,7 +6327,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
                 }
                 Else
                 {
-                    Return (0x0F)
+                    Return (0x18)
                 }
             }
         }
@@ -8838,20 +8440,1163 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I", 0x00000019)
 
         Processor (C31D, 0x77, 0x00000410, 0x06)
         {
-            Name (_HID, "ACPI0007" /* Processor Device */)  // _HID: Hardware ID
-            Name (_UID, 0x77)  // _UID: Unique ID
-            Name (_PXM, 0x03)  // _PXM: Device Proximity
-            Method (_STA, 0, NotSerialized)  // _STA: Status
+
+        }
+    }
+
+    Scope (_SB.PCI0.PEX3)
+    {
+        Device (XHCI)
+        {
+            Name (_ADR, Zero)  // _ADR: Address
+            Name (_S4D, 0x02)  // _S4D: S4 Device State
+            Name (_S3D, 0x02)  // _S3D: S3 Device State
+            Name (_S2D, 0x02)  // _S2D: S2 Device State
+            Name (_S1D, 0x02)  // _S1D: S1 Device State
+            Device (HUBN)
             {
-                If ((CSTA (0x03, 0x77) == Zero))
+                Name (_ADR, Zero)  // _ADR: Address
+                Device (HSP0)
                 {
+                    Name (_ADR, One)  // _ADR: Address
+                    Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
+                    {
+                        Name (UPCA, Package (0x04)
+                        {
+                            0xFF, 
+                            0x03, 
+                            Zero, 
+                            Zero
+                        })
+                        Return (UPCA) /* \_SB_.PCI0.PEX3.XHCI.HUBN.HSP0._UPC.UPCA */
+                    }
+
+                    Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
+                    {
+                        Name (PLDP, Package (0x01)
+                        {
+                            Buffer (0x10)
+                            {
+                                /* 0000 */  0x01, 0xC6, 0x72, 0x00, 0x00, 0x00, 0x00, 0x00,  // ..r.....
+                                /* 0008 */  0x69, 0x0C, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00   // i.......
+                            }
+                        })
+                        Return (PLDP) /* \_SB_.PCI0.PEX3.XHCI.HUBN.HSP0._PLD.PLDP */
+                    }
+
+                    Device (HSP1)
+                    {
+                        Name (_ADR, One)  // _ADR: Address
+                        Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
+                        {
+                            Name (UPCA, Package (0x04)
+                            {
+                                0xFF, 
+                                0x03, 
+                                Zero, 
+                                Zero
+                            })
+                            Return (UPCA) /* \_SB_.PCI0.PEX3.XHCI.HUBN.HSP0.HSP1._UPC.UPCA */
+                        }
+
+                        Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
+                        {
+                            Name (PLDP, Package (0x01)
+                            {
+                                Buffer (0x10)
+                                {
+                                    /* 0000 */  0x01, 0xC6, 0x72, 0x00, 0x00, 0x00, 0x00, 0x00,  // ..r.....
+                                    /* 0008 */  0x69, 0x0C, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00   // i.......
+                                }
+                            })
+                            Return (PLDP) /* \_SB_.PCI0.PEX3.XHCI.HUBN.HSP0.HSP1._PLD.PLDP */
+                        }
+                    }
+
+                    Device (HSP2)
+                    {
+                        Name (_ADR, 0x02)  // _ADR: Address
+                        Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
+                        {
+                            Name (UPCA, Package (0x04)
+                            {
+                                0xFF, 
+                                0x03, 
+                                Zero, 
+                                Zero
+                            })
+                            Return (UPCA) /* \_SB_.PCI0.PEX3.XHCI.HUBN.HSP0.HSP2._UPC.UPCA */
+                        }
+
+                        Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
+                        {
+                            Name (PLDP, Package (0x01)
+                            {
+                                Buffer (0x10)
+                                {
+                                    /* 0000 */  0x01, 0xC6, 0x72, 0x00, 0x00, 0x00, 0x00, 0x00,  // ..r.....
+                                    /* 0008 */  0x69, 0x0C, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00   // i.......
+                                }
+                            })
+                            Return (PLDP) /* \_SB_.PCI0.PEX3.XHCI.HUBN.HSP0.HSP2._PLD.PLDP */
+                        }
+                    }
+
+                    Device (HSP3)
+                    {
+                        Name (_ADR, 0x03)  // _ADR: Address
+                        Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
+                        {
+                            Name (UPCA, Package (0x04)
+                            {
+                                0xFF, 
+                                0x03, 
+                                Zero, 
+                                Zero
+                            })
+                            Return (UPCA) /* \_SB_.PCI0.PEX3.XHCI.HUBN.HSP0.HSP3._UPC.UPCA */
+                        }
+
+                        Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
+                        {
+                            Name (PLDP, Package (0x01)
+                            {
+                                Buffer (0x10)
+                                {
+                                    /* 0000 */  0x01, 0xC6, 0x72, 0x00, 0x00, 0x00, 0x00, 0x00,  // ..r.....
+                                    /* 0008 */  0x69, 0x0C, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00   // i.......
+                                }
+                            })
+                            Return (PLDP) /* \_SB_.PCI0.PEX3.XHCI.HUBN.HSP0.HSP3._PLD.PLDP */
+                        }
+                    }
+
+                    Device (HSP4)
+                    {
+                        Name (_ADR, 0x04)  // _ADR: Address
+                        Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
+                        {
+                            Name (UPCA, Package (0x04)
+                            {
+                                0xFF, 
+                                0x03, 
+                                Zero, 
+                                Zero
+                            })
+                            Return (UPCA) /* \_SB_.PCI0.PEX3.XHCI.HUBN.HSP0.HSP4._UPC.UPCA */
+                        }
+
+                        Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
+                        {
+                            Name (PLDP, Package (0x01)
+                            {
+                                Buffer (0x10)
+                                {
+                                    /* 0000 */  0x01, 0xC6, 0x72, 0x00, 0x00, 0x00, 0x00, 0x00,  // ..r.....
+                                    /* 0008 */  0x69, 0x0C, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00   // i.......
+                                }
+                            })
+                            Return (PLDP) /* \_SB_.PCI0.PEX3.XHCI.HUBN.HSP0.HSP4._PLD.PLDP */
+                        }
+                    }
+
+                    Device (SS01)
+                    {
+                        Name (_ADR, 0x05)  // _ADR: Address
+                        Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
+                        {
+                            Name (UPCA, Package (0x04)
+                            {
+                                0xFF, 
+                                0x03, 
+                                Zero, 
+                                Zero
+                            })
+                            Return (UPCA) /* \_SB_.PCI0.PEX3.XHCI.HUBN.HSP0.SS01._UPC.UPCA */
+                        }
+
+                        Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
+                        {
+                            Name (PLDP, Package (0x01)
+                            {
+                                Buffer (0x10)
+                                {
+                                    /* 0000 */  0x01, 0xC6, 0x72, 0x00, 0x00, 0x00, 0x00, 0x00,  // ..r.....
+                                    /* 0008 */  0x69, 0x0C, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00   // i.......
+                                }
+                            })
+                            Return (PLDP) /* \_SB_.PCI0.PEX3.XHCI.HUBN.HSP0.SS01._PLD.PLDP */
+                        }
+                    }
+
+                    Device (SS02)
+                    {
+                        Name (_ADR, 0x06)  // _ADR: Address
+                        Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
+                        {
+                            Name (UPCA, Package (0x04)
+                            {
+                                0xFF, 
+                                0x03, 
+                                Zero, 
+                                Zero
+                            })
+                            Return (UPCA) /* \_SB_.PCI0.PEX3.XHCI.HUBN.HSP0.SS02._UPC.UPCA */
+                        }
+
+                        Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
+                        {
+                            Name (PLDP, Package (0x01)
+                            {
+                                Buffer (0x10)
+                                {
+                                    /* 0000 */  0x01, 0xC6, 0x72, 0x00, 0x00, 0x00, 0x00, 0x00,  // ..r.....
+                                    /* 0008 */  0x69, 0x0C, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00   // i.......
+                                }
+                            })
+                            Return (PLDP) /* \_SB_.PCI0.PEX3.XHCI.HUBN.HSP0.SS02._PLD.PLDP */
+                        }
+                    }
+
+                    Device (SS03)
+                    {
+                        Name (_ADR, 0x07)  // _ADR: Address
+                        Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
+                        {
+                            Name (UPCA, Package (0x04)
+                            {
+                                0xFF, 
+                                0x03, 
+                                Zero, 
+                                Zero
+                            })
+                            Return (UPCA) /* \_SB_.PCI0.PEX3.XHCI.HUBN.HSP0.SS03._UPC.UPCA */
+                        }
+
+                        Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
+                        {
+                            Name (PLDP, Package (0x01)
+                            {
+                                Buffer (0x10)
+                                {
+                                    /* 0000 */  0x01, 0xC6, 0x72, 0x00, 0x00, 0x00, 0x00, 0x00,  // ..r.....
+                                    /* 0008 */  0x69, 0x0C, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00   // i.......
+                                }
+                            })
+                            Return (PLDP) /* \_SB_.PCI0.PEX3.XHCI.HUBN.HSP0.SS03._PLD.PLDP */
+                        }
+                    }
+
+                    Device (SS04)
+                    {
+                        Name (_ADR, 0x08)  // _ADR: Address
+                        Method (_UPC, 0, Serialized)  // _UPC: USB Port Capabilities
+                        {
+                            Name (UPCA, Package (0x04)
+                            {
+                                0xFF, 
+                                0x03, 
+                                Zero, 
+                                Zero
+                            })
+                            Return (UPCA) /* \_SB_.PCI0.PEX3.XHCI.HUBN.HSP0.SS04._UPC.UPCA */
+                        }
+
+                        Method (_PLD, 0, Serialized)  // _PLD: Physical Location of Device
+                        {
+                            Name (PLDP, Package (0x01)
+                            {
+                                Buffer (0x10)
+                                {
+                                    /* 0000 */  0x01, 0xC6, 0x72, 0x00, 0x00, 0x00, 0x00, 0x00,  // ..r.....
+                                    /* 0008 */  0x69, 0x0C, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00   // i.......
+                                }
+                            })
+                            Return (PLDP) /* \_SB_.PCI0.PEX3.XHCI.HUBN.HSP0.SS04._PLD.PLDP */
+                        }
+                    }
+                    }
+                    }
+
+
+                Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
+                {
+                    Return (GPRW (0x0D, 0x04))
+                }
+            }
+        }
+
+
+    Scope (_SB.PCI0.GFXA)
+    {
+        OperationRegion (PEGP, PCI_Config, Zero, 0x0100)
+        Field (PEGP, ByteAcc, NoLock, Preserve)
+        {
+            Offset (0x3E), 
+                ,   6, 
+            SECR,   1, 
+            Offset (0xA0), 
+                ,   4, 
+            LNKD,   1, 
+            LNKR,   1, 
+            Offset (0xA2), 
+            LSPD,   4, 
+            LSTS,   6, 
+                ,   1, 
+            LTRN,   1, 
+                ,   1, 
+            DLAC,   1, 
+            Offset (0xC0), 
+            TSPD,   4, 
+            Offset (0xE4), 
+            DXST,   2
+        }
+
+        Device (GFX1)
+        {
+            Name (_ADR, Zero)  // _ADR: Address
+            Name (_SUN, One)  // _SUN: Slot User Number
+            OperationRegion (GFXH, PCI_Config, Zero, 0x40)
+            Field (GFXH, ByteAcc, NoLock, Preserve)
+            {
+                VID0,   16, 
+                DID0,   16, 
+                EDEC,   3, 
+                Offset (0x18), 
+                BAR2,   32
+            }
+
+            Name (GFXN, "GFXA:")
+            Name (BARS, Zero)
+            Method (PTRN, 1, NotSerialized)
+            {
+                If ((Arg0 < 0x0A))
+                {
+                    Local0 = Arg0
+                    Local1 = One
+                }
+                Else
+                {
+                    Local0 = 0x0A
+                    Local1 = (Arg0 / Local0)
+                }
+
+                Local3 = Zero
+                While (((LTRN != Zero) && (Local1 > Zero)))
+                {
+                    Sleep (Local0)
+                    Local1--
+                    Local3 += Local0
+                }
+
+                Return ((LTRN == Zero))
+            }
+
+            Method (PDLA, 1, NotSerialized)
+            {
+                If ((Arg0 < 0x0A))
+                {
+                    Local0 = Arg0
+                    Local1 = One
+                }
+                Else
+                {
+                    Local0 = 0x0A
+                    Local1 = (Arg0 / Local0)
+                }
+
+                Local3 = Zero
+                While (((DLAC != One) && (Local1 > Zero)))
+                {
+                    Sleep (Local0)
+                    Local1--
+                    Local3 += Local0
+                }
+
+                Return ((DLAC == One))
+            }
+
+            Method (PGPR, 0, NotSerialized)
+            {
+                PTRN (0xC8)
+                If (!PDLA (0x012C))
+                {
+                    Return (One)
+                }
+
+                If ((VID0 == 0xFFFF))
+                {
+                    Return (One)
+                }
+
+                Return (Zero)
+            }
+
+            Name (PLB0, Zero)
+            Name (PLB1, Zero)
+            Method (PSPD, 1, NotSerialized)
+            {
+                Local0 = Zero
+                While (((LSPD != Arg0) && (Local0 < 0x0A)))
+                {
+                    TSPD = Arg0
+                    LNKR = One
+                    PGPR ()
+                    Local0++
+                }
+            }
+
+            Method (RWLL, 4, NotSerialized)
+            {
+                Local0 = Arg0
+                While ((Local0 <= Arg1))
+                {
+                    RWLN (Local0, Arg2, Arg3)
+                    Local0++
+                }
+            }
+
+            Method (RWLN, 3, NotSerialized)
+            {
+                OperationRegion (BARD, SystemMemory, BARS, 0x20)
+                Field (BARD, DWordAcc, NoLock, Preserve)
+                {
+                    Offset (0x08), 
+                    PH0I,   32, 
+                    PH0D,   32, 
+                    PH1I,   32, 
+                    PH1D,   32
+                }
+
+                If ((Arg0 < 0x08))
+                {
+                    Local0 = (Arg0 + 0x20)
+                    PH0I = Local0
+                    Local1 = PH0D /* \_SB_.PCI0.GFXA.GFX1.RWLN.PH0D */
+                    PH0I = Local0
+                    PH0D = ((Local1 & Arg1) | Arg2)
+                }
+                Else
+                {
+                    Local0 = (Arg0 + 0x18)
+                    PH1I = Local0
+                    Local1 = PH1D /* \_SB_.PCI0.GFXA.GFX1.RWLN.PH1D */
+                    PH1I = Local0
+                    PH1D = ((Local1 & Arg1) | Arg2)
+                }
+            }
+
+            Method (GXW1, 0, NotSerialized)
+            {
+                Local0 = DXST /* \_SB_.PCI0.GFXA.DXST */
+                DXST = Zero
+                If ((VID0 == 0xFFFF))
+                {
+                    Return (One)
+                }
+
+                If ((BARS == Zero))
+                {
+                    Return (One)
+                }
+
+                BAR2 = BARS /* \_SB_.PCI0.GFXA.GFX1.BARS */
+                EDEC = 0x07
+                OperationRegion (BARE, SystemMemory, BARS, 0x6000)
+                Field (BARE, DWordAcc, NoLock, Preserve)
+                {
+                    Offset (0x08), 
+                    PH0I,   32, 
+                    PH0D,   32, 
+                    PH1I,   32, 
+                    PH1D,   32, 
+                    Offset (0x30), 
+                    CINX,   32, 
+                    CDAT,   32, 
+                    Offset (0x5444), 
+                    R544,   32
+                }
+
+                IndexField (CINX, CDAT, DWordAcc, NoLock, Preserve)
+                {
+                    Offset (0x28), 
+                    R028,   32
+                }
+
+                IndexField (PH0I, PH0D, DWordAcc, NoLock, Preserve)
+                {
+                    Offset (0x16000), 
+                    F000,   32, 
+                    Offset (0x16018), 
+                    F018,   32
+                }
+
+                IndexField (PH1I, PH1D, DWordAcc, NoLock, Preserve)
+                {
+                    Offset (0x16000), 
+                    F100,   32, 
+                    Offset (0x16018), 
+                    F118,   32
+                }
+
+                F000 = ((F000 & 0xFFF00000) | 0x0401)
+                F100 = ((F100 & 0xFFF00000) | 0x0401)
+                F018 = ((F018 & 0xFFF00FFF) | 0x000CC000)
+                F118 = ((F118 & 0xFFF00FFF) | 0x000CC000)
+                R544 &= 0xFFFFF9FF
+                If (((R028 & One) == Zero))
+                {
+                    Local0 = LSTS /* \_SB_.PCI0.GFXA.LSTS */
+                    Local1 = 0x0F
+                }
+                Else
+                {
+                    Local0 = Zero
+                    Local1 = (0x0F - LSTS) /* \_SB_.PCI0.GFXA.LSTS */
+                }
+
+                RWLL (Local0, Local1, 0xFFFF0000, 0x4400)
+                PSPD (One)
+                PSPD (0x03)
+                RWLL (Local0, Local1, 0xFFFF0000, Zero)
+                DXST = Local0
+                Return (Zero)
+            }
+
+            Method (GXWA, 0, NotSerialized)
+            {
+                Local0 = GXW1 ()
+                If ((Local0 != Zero))
+                {
+                    Return (Local0)
+                }
+
+                SECR = One
+                Sleep (0x0A)
+                Local0 = Zero
+                While (((Local0 < 0x0A) && (DLAC != Zero)))
+                {
+                    Sleep (0x02)
+                    Local0++
+                }
+
+                SECR = Zero
+                If ((PGPR () != Zero))
+                {
+                    Return (One)
+                }
+
+                Return (Zero)
+            }
+
+            Method (PWRD, 1, Serialized)
+            {
+                If (Arg0)
+                {
+                    BARS = (BAR2 & 0xFFFFFFF0)
+                    LNKD = One
+                    Sleep (0x64)
                     Return (Zero)
                 }
                 Else
                 {
-                    Return (0x0F)
+                    LNKD = Zero
+                    If ((PGPR () != Zero))
+                    {
+                        Return (One)
+                    }
+
+                    If ((LSTS != 0x10))
+                    {
+                        Local0 = GXWA ()
+                        Return (Local0)
+                    }
+
+                    Return (Zero)
                 }
             }
+
+            Name (ATIB, Buffer (0x0100){})
+            Method (ATIF, 2, Serialized)
+            {
+                If ((Arg0 == Zero))
+                {
+                    Return (AF00 ())
+                }
+
+                If ((Arg0 == One))
+                {
+                    Return (AF01 ())
+                }
+
+                If ((Arg0 == 0x02))
+                {
+                    Return (AF02 ())
+                }
+                Else
+                {
+                    CreateWordField (ATIB, Zero, SSZE)
+                    CreateWordField (ATIB, 0x02, VERN)
+                    CreateDWordField (ATIB, 0x04, NMSK)
+                    CreateDWordField (ATIB, 0x08, SFUN)
+                    SSZE = Zero
+                    VERN = Zero
+                    NMSK = Zero
+                    SFUN = Zero
+                    Return (ATIB) /* \_SB_.PCI0.GFXA.GFX1.ATIB */
+                }
+            }
+
+            Method (AF00, 0, NotSerialized)
+            {
+                CreateWordField (ATIB, Zero, SSZE)
+                CreateWordField (ATIB, 0x02, VERN)
+                CreateDWordField (ATIB, 0x04, NMSK)
+                CreateDWordField (ATIB, 0x08, SFUN)
+                SSZE = 0x0C
+                VERN = One
+                NMSK = 0x0C
+                SFUN = 0x03
+                Return (ATIB) /* \_SB_.PCI0.GFXA.GFX1.ATIB */
+            }
+
+            Method (AF01, 0, NotSerialized)
+            {
+                CreateWordField (ATIB, Zero, SSZE)
+                CreateDWordField (ATIB, 0x02, VMSK)
+                CreateDWordField (ATIB, 0x06, FLGS)
+                SSZE = 0x0A
+                VMSK = 0x03
+                FLGS = One
+                Return (ATIB) /* \_SB_.PCI0.GFXA.GFX1.ATIB */
+            }
+
+            Method (AF02, 0, NotSerialized)
+            {
+                CreateWordField (ATIB, Zero, SSZE)
+                CreateDWordField (ATIB, 0x02, PSBI)
+                CreateByteField (ATIB, 0x06, EXPM)
+                CreateByteField (ATIB, 0x07, THRM)
+                CreateByteField (ATIB, 0x08, THID)
+                CreateByteField (ATIB, 0x09, FPWR)
+                CreateByteField (ATIB, 0x0A, FPID)
+                CreateByteField (ATIB, 0x0B, SPWR)
+                CreateByteField (ATIB, 0x0C, PBBL)
+                SSZE = 0x0D
+                PSBI = 0x08
+                FPWR = Zero
+                FPID = EG1P /* \EG1P */
+                Return (ATIB) /* \_SB_.PCI0.GFXA.GFX1.ATIB */
+            }
+        }
+
+        Device (HDAD)
+        {
+            Name (_ADR, One)  // _ADR: Address
+            Method (_STA, 0, NotSerialized)  // _STA: Status
+            {
+                Return (0x0B)
+            }
+        }
+    }
+
+    Scope (_SB.PCI0.GFXB)
+    {
+        OperationRegion (PEGP, PCI_Config, Zero, 0x0100)
+        Field (PEGP, ByteAcc, NoLock, Preserve)
+        {
+            Offset (0x3E), 
+                ,   6, 
+            SECR,   1, 
+            Offset (0xA0), 
+                ,   4, 
+            LNKD,   1, 
+            LNKR,   1, 
+            Offset (0xA2), 
+            LSPD,   4, 
+            LSTS,   6, 
+                ,   1, 
+            LTRN,   1, 
+                ,   1, 
+            DLAC,   1, 
+            Offset (0xC0), 
+            TSPD,   4, 
+            Offset (0xE4), 
+            DXST,   2
+        }
+
+        Device (GFX2)
+        {
+            Name (_ADR, Zero)  // _ADR: Address
+            Name (_SUN, 0x02)  // _SUN: Slot User Number
+            OperationRegion (GFXH, PCI_Config, Zero, 0x40)
+            Field (GFXH, ByteAcc, NoLock, Preserve)
+            {
+                VID0,   16, 
+                DID0,   16, 
+                EDEC,   3, 
+                Offset (0x18), 
+                BAR2,   32
+            }
+
+            Name (GFXN, "GFXB:")
+            Name (BARS, Zero)
+            Method (PTRN, 1, NotSerialized)
+            {
+                If ((Arg0 < 0x0A))
+                {
+                    Local0 = Arg0
+                    Local1 = One
+                }
+                Else
+                {
+                    Local0 = 0x0A
+                    Local1 = (Arg0 / Local0)
+                }
+
+                Local3 = Zero
+                While (((LTRN != Zero) && (Local1 > Zero)))
+                {
+                    Sleep (Local0)
+                    Local1--
+                    Local3 += Local0
+                }
+
+                Return ((LTRN == Zero))
+            }
+
+            Method (PDLA, 1, NotSerialized)
+            {
+                If ((Arg0 < 0x0A))
+                {
+                    Local0 = Arg0
+                    Local1 = One
+                }
+                Else
+                {
+                    Local0 = 0x0A
+                    Local1 = (Arg0 / Local0)
+                }
+
+                Local3 = Zero
+                While (((DLAC != One) && (Local1 > Zero)))
+                {
+                    Sleep (Local0)
+                    Local1--
+                    Local3 += Local0
+                }
+
+                Return ((DLAC == One))
+            }
+
+            Method (PGPR, 0, NotSerialized)
+            {
+                PTRN (0xC8)
+                If (!PDLA (0x012C))
+                {
+                    Return (One)
+                }
+
+                If ((VID0 == 0xFFFF))
+                {
+                    Return (One)
+                }
+
+                Return (Zero)
+            }
+
+            Name (PLB0, Zero)
+            Name (PLB1, Zero)
+            Method (PSPD, 1, NotSerialized)
+            {
+                Local0 = Zero
+                While (((LSPD != Arg0) && (Local0 < 0x0A)))
+                {
+                    TSPD = Arg0
+                    LNKR = One
+                    PGPR ()
+                    Local0++
+                }
+            }
+
+            Method (RWLL, 4, NotSerialized)
+            {
+                Local0 = Arg0
+                While ((Local0 <= Arg1))
+                {
+                    RWLN (Local0, Arg2, Arg3)
+                    Local0++
+                }
+            }
+
+            Method (RWLN, 3, NotSerialized)
+            {
+                OperationRegion (BARD, SystemMemory, BARS, 0x20)
+                Field (BARD, DWordAcc, NoLock, Preserve)
+                {
+                    Offset (0x08), 
+                    PH0I,   32, 
+                    PH0D,   32, 
+                    PH1I,   32, 
+                    PH1D,   32
+                }
+
+                If ((Arg0 < 0x08))
+                {
+                    Local0 = (Arg0 + 0x20)
+                    PH0I = Local0
+                    Local1 = PH0D /* \_SB_.PCI0.GFXB.GFX2.RWLN.PH0D */
+                    PH0I = Local0
+                    PH0D = ((Local1 & Arg1) | Arg2)
+                }
+                Else
+                {
+                    Local0 = (Arg0 + 0x18)
+                    PH1I = Local0
+                    Local1 = PH1D /* \_SB_.PCI0.GFXB.GFX2.RWLN.PH1D */
+                    PH1I = Local0
+                    PH1D = ((Local1 & Arg1) | Arg2)
+                }
+            }
+
+            Method (GXW1, 0, NotSerialized)
+            {
+                Local0 = DXST /* \_SB_.PCI0.GFXB.DXST */
+                DXST = Zero
+                If ((VID0 == 0xFFFF))
+                {
+                    Return (One)
+                }
+
+                If ((BARS == Zero))
+                {
+                    Return (One)
+                }
+
+                BAR2 = BARS /* \_SB_.PCI0.GFXB.GFX2.BARS */
+                EDEC = 0x07
+                OperationRegion (BARE, SystemMemory, BARS, 0x6000)
+                Field (BARE, DWordAcc, NoLock, Preserve)
+                {
+                    Offset (0x08), 
+                    PH0I,   32, 
+                    PH0D,   32, 
+                    PH1I,   32, 
+                    PH1D,   32, 
+                    Offset (0x30), 
+                    CINX,   32, 
+                    CDAT,   32, 
+                    Offset (0x5444), 
+                    R544,   32
+                }
+
+                IndexField (CINX, CDAT, DWordAcc, NoLock, Preserve)
+                {
+                    Offset (0x28), 
+                    R028,   32
+                }
+
+                IndexField (PH0I, PH0D, DWordAcc, NoLock, Preserve)
+                {
+                    Offset (0x16000), 
+                    F000,   32, 
+                    Offset (0x16018), 
+                    F018,   32
+                }
+
+                IndexField (PH1I, PH1D, DWordAcc, NoLock, Preserve)
+                {
+                    Offset (0x16000), 
+                    F100,   32, 
+                    Offset (0x16018), 
+                    F118,   32
+                }
+
+                F000 = ((F000 & 0xFFF00000) | 0x0401)
+                F100 = ((F100 & 0xFFF00000) | 0x0401)
+                F018 = ((F018 & 0xFFF00FFF) | 0x000CC000)
+                F118 = ((F118 & 0xFFF00FFF) | 0x000CC000)
+                R544 &= 0xFFFFF9FF
+                If (((R028 & One) == Zero))
+                {
+                    Local0 = LSTS /* \_SB_.PCI0.GFXB.LSTS */
+                    Local1 = 0x0F
+                }
+                Else
+                {
+                    Local0 = Zero
+                    Local1 = (0x0F - LSTS) /* \_SB_.PCI0.GFXB.LSTS */
+                }
+
+                RWLL (Local0, Local1, 0xFFFF0000, 0x4400)
+                PSPD (One)
+                PSPD (0x03)
+                RWLL (Local0, Local1, 0xFFFF0000, Zero)
+                DXST = Local0
+                Return (Zero)
+            }
+
+            Method (GXWA, 0, NotSerialized)
+            {
+                Local0 = GXW1 ()
+                If ((Local0 != Zero))
+                {
+                    Return (Local0)
+                }
+
+                SECR = One
+                Sleep (0x0A)
+                Local0 = Zero
+                While (((Local0 < 0x0A) && (DLAC != Zero)))
+                {
+                    Sleep (0x02)
+                    Local0++
+                }
+
+                SECR = Zero
+                If ((PGPR () != Zero))
+                {
+                    Return (One)
+                }
+
+                Return (Zero)
+            }
+
+            Method (PWRD, 1, Serialized)
+            {
+                If (Arg0)
+                {
+                    BARS = (BAR2 & 0xFFFFFFF0)
+                    LNKD = One
+                    Sleep (0x64)
+                    Return (Zero)
+                }
+                Else
+                {
+                    LNKD = Zero
+                    If ((PGPR () != Zero))
+                    {
+                        Return (One)
+                    }
+
+                    If ((LSTS != 0x10))
+                    {
+                        Local0 = GXWA ()
+                        Return (Local0)
+                    }
+
+                    Return (Zero)
+                }
+            }
+
+            Name (ATIB, Buffer (0x0100){})
+            Method (ATIF, 2, Serialized)
+            {
+                If ((Arg0 == Zero))
+                {
+                    Return (AF00 ())
+                }
+
+                If ((Arg0 == One))
+                {
+                    Return (AF01 ())
+                }
+
+                If ((Arg0 == 0x02))
+                {
+                    Return (AF02 ())
+                }
+                Else
+                {
+                    CreateWordField (ATIB, Zero, SSZE)
+                    CreateWordField (ATIB, 0x02, VERN)
+                    CreateDWordField (ATIB, 0x04, NMSK)
+                    CreateDWordField (ATIB, 0x08, SFUN)
+                    SSZE = Zero
+                    VERN = Zero
+                    NMSK = Zero
+                    SFUN = Zero
+                    Return (ATIB) /* \_SB_.PCI0.GFXB.GFX2.ATIB */
+                }
+            }
+
+            Method (AF00, 0, NotSerialized)
+            {
+                CreateWordField (ATIB, Zero, SSZE)
+                CreateWordField (ATIB, 0x02, VERN)
+                CreateDWordField (ATIB, 0x04, NMSK)
+                CreateDWordField (ATIB, 0x08, SFUN)
+                SSZE = 0x0C
+                VERN = One
+                NMSK = 0x0C
+                SFUN = 0x03
+                Return (ATIB) /* \_SB_.PCI0.GFXB.GFX2.ATIB */
+            }
+
+            Method (AF01, 0, NotSerialized)
+            {
+                CreateWordField (ATIB, Zero, SSZE)
+                CreateDWordField (ATIB, 0x02, VMSK)
+                CreateDWordField (ATIB, 0x06, FLGS)
+                SSZE = 0x0A
+                VMSK = 0x03
+                FLGS = One
+                Return (ATIB) /* \_SB_.PCI0.GFXB.GFX2.ATIB */
+            }
+
+            Method (AF02, 0, NotSerialized)
+            {
+                CreateWordField (ATIB, Zero, SSZE)
+                CreateDWordField (ATIB, 0x02, PSBI)
+                CreateByteField (ATIB, 0x06, EXPM)
+                CreateByteField (ATIB, 0x07, THRM)
+                CreateByteField (ATIB, 0x08, THID)
+                CreateByteField (ATIB, 0x09, FPWR)
+                CreateByteField (ATIB, 0x0A, FPID)
+                CreateByteField (ATIB, 0x0B, SPWR)
+                CreateByteField (ATIB, 0x0C, PBBL)
+                SSZE = 0x0D
+                PSBI = 0x08
+                FPWR = Zero
+                FPID = EG2P /* \EG2P */
+                Return (ATIB) /* \_SB_.PCI0.GFXB.GFX2.ATIB */
+            }
+
+            Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+            {
+                If ((Arg0 == ToUUID ("a0b5b7c6-1318-441c-b0c9-fe695eaf949b") /* Unknown UUID */))
+                {
+                    If (((VID0 & 0xFFFF) != 0xFFFF))
+                    {
+                        Local0 = Package (0x02)
+                            {
+                                "hda-gfx", 
+                                Buffer (0x0A)
+                                {
+                                    "onboard-2"
+                                }
+                            }
+                        DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                        Return (Local0)
+                    }
+                }
+
+                Return (0x80000002)
+            }
+        }
+
+        Device (HDAU)
+        {
+            Name (_ADR, One)  // _ADR: Address
+            OperationRegion (HDAH, PCI_Config, Zero, 0x40)
+            Field (HDAH, ByteAcc, NoLock, Preserve)
+            {
+                VID0,   16, 
+                DID0,   16
+            }
+
+            Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+            {
+                If ((Arg0 == ToUUID ("a0b5b7c6-1318-441c-b0c9-fe695eaf949b") /* Unknown UUID */))
+                {
+                    If (((VID0 & 0xFFFF) != 0xFFFF))
+                    {
+                        Local0 = Package (0x02)
+                            {
+                                "hda-gfx", 
+                                Buffer (0x0A)
+                                {
+                                    "onboard-2"
+                                }
+                            }
+                        DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                        Return (Local0)
+                    }
+                }
+
+                Return (0x80000002)
+            }
+        }
+    }
+
+    Scope (_SB.PCI0.PEX1)
+    {
+        Device (WIFI)
+        {
+            Name (_ADR, Zero)  // _ADR: Address
+            Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+            {
+                Local0 = Package (0x04)
+                    {
+                        "built-in", 
+                        Buffer (0x02)
+                        {
+                            "1"
+                        }, 
+
+                        "location", 
+                        Buffer (0x02)
+                        {
+                            "1"
+                        }
+                    }
+                DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                Return (Local0)
+            }
+        }
+    }
+
+    Scope (_SB.PCI0.PEX2)
+    {
+        Device (LAN0)
+        {
+            Name (_ADR, Zero)  // _ADR: Address
+            Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+            {
+                Local0 = Package (0x04)
+                    {
+                        "built-in", 
+                        Buffer (0x02)
+                        {
+                            "1"
+                        }, 
+
+                        "location", 
+                        Buffer (0x02)
+                        {
+                            "1"
+                        }
+                    }
+                DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                Return (Local0)
+            }
+        }
+    }
+
+    Scope (_SB.PCI0.LPCB)
+    {
+        Device (PMCR)
+        {
+            Name (_HID, EisaId ("APP9876"))  // _HID: Hardware ID
+            Method (_STA, 0, NotSerialized)  // _STA: Status
+            {
+                If (_OSI ("Darwin"))
+                {
+                    Return (0x0B)
+                }
+                Else
+                {
+                    Return (Zero)
+                }
+            }
+
+            Name (_CRS, ResourceTemplate ()  // _CRS: Current Resource Settings
+            {
+                Memory32Fixed (ReadWrite,
+                    0xFE000000,         // Address Base
+                    0x00010000,         // Address Length
+                    )
+            })
         }
     }
 
