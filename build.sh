@@ -11,5 +11,5 @@ mkdir -p Patch
 
 echo "构建完成开始生成sha256sum码"
 
-md5sum ./build/E7735280_x79gd45_$current_time.bin >./build/E7735280_X79MA-GD45_$current_time.bin.md5.txt
+md5sum ./build/E7735280_X79MA-GD45_$current_time.bin >./build/E7735280_X79MA-GD45_$current_time.bin.md5.txt
 
