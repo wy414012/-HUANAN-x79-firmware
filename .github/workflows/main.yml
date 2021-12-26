@@ -4,14 +4,11 @@ name: CI
 
 
 on:
-
   push:
-    branches: [ main ]
   pull_request:
-    branches: [ main ]
-
-
   workflow_dispatch:
+  release:
+    types: [published]
 
 
 jobs:
@@ -39,27 +36,15 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: mac_bios_build
-          path: build/*.bin
+          path: build/*
 
-      - name: 上传md5文件
-        uses: actions/upload-artifact@v2
-        with:
-          name: mac_bios_build
-          path: build/*.txt
-          
+         
       - name: 上传发布版本
         if: github.event_name == 'release'
-        uses: svenstaro/upload-release-action@483c1e56f95e88835747b1c7c60581215016cbf2
+        uses: wy414012/upload-release-action@483c1e56f95e88835747b1c7c60581215016cbf2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: build/*.bin
+          file: build/*
           tag: ${{ github.ref }}
           file_glob: true
-      - name: 上传发布版本
-        if: github.event_name == 'release'
-        uses: svenstaro/upload-release-action@483c1e56f95e88835747b1c7c60581215016cbf2
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: build/*.txt
-          tag: ${{ github.ref }}
-          file_glob: true
+
